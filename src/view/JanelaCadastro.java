@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
 import java.awt.Component;
 import javax.swing.JRadioButton;
 
@@ -22,6 +23,7 @@ public class JanelaCadastro extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfNome;
 	private JTextField tfCpf;
+	private JButton btnCadastrar;
 
 	/**
 	 * Launch the application.
@@ -89,7 +91,7 @@ public class JanelaCadastro extends JFrame {
 		
 		contentPane.add(tfCpf);
 		
-		JButton btnCadastrar = new JButton("CADASTRAR");
+		btnCadastrar = new JButton("CADASTRAR");
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnCadastrar.setEnabled(false);
 		btnCadastrar.setForeground(new Color(255, 255, 255));
@@ -121,5 +123,30 @@ public class JanelaCadastro extends JFrame {
 		rdbtnCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnCliente.setBounds(60, 278, 141, 37);
 		contentPane.add(rdbtnCliente);
+	}
+	public void cadastrar(ActionListener actionListener) {
+		this.btnCadastrar.addActionListener(actionListener);
+	}
+	public String getNome() {
+		return this.tfNome.getText();
+	}
+	public void setNome() {
+		this.tfNome.setText("");
+	}
+	public String getCpf() {
+		return this.tfCpf.getText();
+	}
+	public void setCpf() {
+		this.tfCpf.setText("");
+	}
+	public String getTipoUser() {
+		return this.tfCpf.getText();
+	}
+	public void setTipoUser() {
+		this.tfCpf.setText("");
+	}
+	public void limparFormulario() {
+		this.tfNome.setText("");
+		this.tfCpf.setText("");
 	}
 }

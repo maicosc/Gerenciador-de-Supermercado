@@ -6,6 +6,14 @@ public class Usuario {
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Usuario(String nome, String cpf, String tipoUsuario) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.tipoUsuario = tipoUsuario;
+	}
+
 	public String getNome() {
 		return nome;
 	}

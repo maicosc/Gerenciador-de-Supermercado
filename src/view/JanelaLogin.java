@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -28,6 +30,8 @@ public class JanelaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JButton btnNewButton;
+	private JLabel lblNewLabel_4;
 
 	/**
 	 * Launch the application.
@@ -76,7 +80,7 @@ public class JanelaLogin extends JFrame {
 		
 		contentPane.add(textField_1);
 		
-		JButton btnNewButton = new JButton("ENTRAR");
+		btnNewButton = new JButton("ENTRAR");
 		btnNewButton.setEnabled(false);
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(255, 0, 0));
@@ -89,7 +93,7 @@ public class JanelaLogin extends JFrame {
 		lblNewLabel_3.setBounds(50, 279, 132, 14);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Cadastrar");
+		lblNewLabel_4 = new JLabel("Cadastrar");
 		lblNewLabel_4.setForeground(new Color(0, 128, 128));
 		lblNewLabel_4.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblNewLabel_4.setBounds(170, 279, 64, 14);
@@ -107,7 +111,27 @@ public class JanelaLogin extends JFrame {
 		lblNewLabel.setBounds(10, 11, 40, 40);
 		contentPane.add(lblNewLabel);
 	}
-	
-	
+	public void logar(ActionListener actionListener) {
+		this.btnNewButton.addActionListener(actionListener);
+	}
+	public String getNome() {
+		return this.textField.getText();
+	}
+	public void setNome() {
+		this.textField.setText("");
+	}
+	public String getCpf() {
+		return this.textField_1.getText();
+	}
+	public void setCpf() {
+		this.textField_1.setText("");
+	}
+	public void limparFormulario() {
+		this.textField.setText("");
+		this.textField_1.setText("");
+	}
+	public void irParaCadastro(MouseListener mouseListener) {
+		this.lblNewLabel_4.addMouseListener(mouseListener);
+	}
 
 }
