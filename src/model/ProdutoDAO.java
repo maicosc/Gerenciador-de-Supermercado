@@ -20,7 +20,7 @@ public class ProdutoDAO {
             pstm.setString(1, produto.getNomeProd());
             pstm.setDouble(2, produto.getPreco());
             pstm.setInt(3, produto.getQuantidade());
-            pstm.setInt(4, produto.getId());
+            pstm.setInt(4, produto.getCodProd());
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class ProdutoDAO {
             pstm.setString(1, produto.getNomeProd());
             pstm.setDouble(2, produto.getPreco());
             pstm.setInt(3, produto.getQuantidade());
-            pstm.setInt(4, produto.getId());
+            pstm.setInt(4, produto.getCodProd());
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

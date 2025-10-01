@@ -18,6 +18,7 @@ public class CadastroController {
 
 		
 		this.view.cadastrar(e -> {
+			
 			String nome = view.getNome();
 			String cpf = view.getCpf();
 			String tipoUser = view.getTipoUser();
@@ -30,6 +31,7 @@ public class CadastroController {
 				this.model.adicionarUsuario(u);
 
 				this.view.limparFormulario();
+				navegador.navegarPara("LOGIN");
 				
 			}
 		});

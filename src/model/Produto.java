@@ -3,9 +3,9 @@ package model;
 public class Produto {
 
 	private double preco;
-	private int quantidade, id;
+	private int quantidade, codProd;
 	private String nomeProd;
-	public Produto(double preco,int quantidade,String nomeProd, int id) {
+	public Produto(String nomeProd, int quantidade, double preco, int codProd) {
 		// TODO Auto-generated constructor stub
 	}
 	public Produto() {
@@ -29,8 +29,12 @@ public class Produto {
 	public void setNomeProd(String nomeProd) {
 		this.nomeProd = nomeProd;
 	}
-	public int getId() {
-		return id;
+	public int getCodProd() {
+		return codProd;
 	}
+	public void setCodProd(int codProd) {
+		this.codProd = codProd;
+	}
+	
 	
 }

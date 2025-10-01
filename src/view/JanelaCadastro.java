@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,112 +18,114 @@ import java.awt.event.ActionListener;
 import java.awt.Component;
 import javax.swing.JRadioButton;
 
-public class JanelaCadastro extends JFrame {
+public class JanelaCadastro extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfNome;
 	private JTextField tfCpf;
 	private JButton btnCadastrar;
+	private String tipoUser;
+	private ButtonGroup grupo;
+	private JRadioButton rdbtnCliente, rdbtnAdm;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JanelaCadastro frame = new JanelaCadastro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public JanelaCadastro() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 300, 450);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(234, 253, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		
+		setBounds(100, 100, 820, 568);
+		
+		setBackground(new Color(234, 253, 255));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		setLayout(null);
 		
 		JLabel lblNomaInc = new JLabel("REDE MAIK");
 		lblNomaInc.setForeground(new Color(255, 0, 0));
 		lblNomaInc.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNomaInc.setBounds(60, 13, 122, 37);
-		contentPane.add(lblNomaInc);
+		add(lblNomaInc);
 		
 		JLabel lblSlogan = new JLabel("Sempre do seu lado");
 		lblSlogan.setForeground(new Color(0, 0, 0));
 		lblSlogan.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSlogan.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblSlogan.setBounds(10, 49, 132, 14);
-		contentPane.add(lblSlogan);
+		add(lblSlogan);
 		
 		tfNome = new JTextField();
-		tfNome.setFocusTraversalPolicyProvider(true);
-		tfNome.setFocusable(false);
 		tfNome.setName("Nome");
 		tfNome.setToolTipText("Nome");
-		tfNome.requestFocus(false);
-		tfNome.setBounds(10, 112, 264, 30);
-		if (tfNome.getText().trim().equals("")) {
-			tfNome.setText("Digite sua senha!");
-		}
+		tfNome.setBounds(125, 116, 567, 40);
+		
 			  
-		contentPane.add(tfNome);
+		add(tfNome);
 		tfNome.setColumns(10);
 		
 		tfCpf = new JTextField();
-		tfCpf.setEnabled(false);
+		tfCpf.setEnabled(true);
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(10, 172, 264, 30);
+		tfCpf.setBounds(125, 182, 567, 40);
 		
-		contentPane.add(tfCpf);
+		add(tfCpf);
 		
 		btnCadastrar = new JButton("CADASTRAR");
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnCadastrar.setEnabled(false);
+		btnCadastrar.setEnabled(true);
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(255, 0, 0));
-		btnCadastrar.setBounds(42, 345, 206, 30);
+		btnCadastrar.setBounds(271, 328, 264, 50);
 		
-		contentPane.add(btnCadastrar);
+		add(btnCadastrar);
 		
 		JLabel lblEmpresa = new JLabel("Maker by Cybernooste Technologies Solutions");
 		lblEmpresa.setFont(new Font("Tahoma", Font.ITALIC, 9));
 		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblEmpresa.setBounds(10, 386, 264, 14);
-		contentPane.add(lblEmpresa);
+		lblEmpresa.setBounds(185, 483, 389, 37);
+		add(lblEmpresa);
 		
 		JLabel lblIcon = new JLabel("New label");
 		lblIcon.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/LogoSuperMercado.png")));
 		lblIcon.setBounds(10, 11, 40, 40);
-		contentPane.add(lblIcon);
+		add(lblIcon);
 		
-		JRadioButton rdbtnAdm = new JRadioButton("Administrador");
+		rdbtnAdm = new JRadioButton("Administrador");
 		rdbtnAdm.setBackground(new Color(234, 253, 255));
 		rdbtnAdm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rdbtnAdm.setBounds(60, 228, 141, 37);
-		contentPane.add(rdbtnAdm);
+		rdbtnAdm.setBounds(240, 256, 141, 37);
+		add(rdbtnAdm);
 		
-		JRadioButton rdbtnCliente = new JRadioButton("Cliente");
+		rdbtnCliente = new JRadioButton("Cliente");
 		rdbtnCliente.setBackground(new Color(234, 253, 255));
 		rdbtnCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rdbtnCliente.setBounds(60, 278, 141, 37);
-		contentPane.add(rdbtnCliente);
+		rdbtnCliente.setBounds(447, 256, 141, 37);
+		add(rdbtnCliente);
+		
+		grupo = new ButtonGroup();
+		grupo.add(rdbtnCliente);
+		grupo.add(rdbtnAdm);
+		
+		
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNome.setBounds(54, 115, 74, 37);
+		add(lblNome);
+		
+		JLabel lblCPF = new JLabel("CPF:");
+		lblCPF.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblCPF.setBounds(60, 181, 61, 37);
+		add(lblCPF);
 	}
 	public void cadastrar(ActionListener actionListener) {
 		this.btnCadastrar.addActionListener(actionListener);
@@ -140,13 +143,23 @@ public class JanelaCadastro extends JFrame {
 		this.tfCpf.setText("");
 	}
 	public String getTipoUser() {
-		return this.tfCpf.getText();
+		if(rdbtnAdm.isSelected()) {
+			return "ADMINISTRADOR";
+		}else if (rdbtnCliente.isSelected()) {
+			return "CLIENTE";
+		}else {
+			return null;
+		}
+		
 	}
-	public void setTipoUser() {
-		this.tfCpf.setText("");
+	public void setTipoUser(String text) {
+		this.tipoUser = text;
 	}
 	public void limparFormulario() {
 		this.tfNome.setText("");
 		this.tfCpf.setText("");
+		rdbtnAdm.setSelected(false);
+		rdbtnCliente.setSelected(false);
 	}
+	
 }

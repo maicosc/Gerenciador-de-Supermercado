@@ -2,40 +2,54 @@ package model;
 
 public class Carrinho {
 
-	private int quantidadeItens, id;
-	private double valorTotal;
-	private String[] itens;
+	private int id;
+	private double valorProduto;
+	private String nomeProduto, cpf;
+	private int codProd, quantidade;
+	public Carrinho( double valorProduto, String nomeProduto, int quantidade, int codProd, String cpf) {
+		
+	}
 	
 	public Carrinho() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public int getQuantidadeItens() {
-		return quantidadeItens;
-	}
-
-	public void setQuantidadeItens(int quantidadeItens) {
-		this.quantidadeItens = quantidadeItens;
+		super();
 	}
 
 	public int getId() {
 		return id;
 	}
-
-	public double getValorTotal() {
-		return valorTotal;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public void setValorTotal(double valorTotal) {
-		this.valorTotal = valorTotal;
+	public double getValorProduto() {
+		return valorProduto;
 	}
-
-	public String[] getItens() {
-		return itens;
+	public void setValorProduto(double valorProduto) {
+		this.valorProduto = valorProduto;
 	}
-
-	public void setItens(String[] itens) {
-		this.itens = itens;
+	public String getNomeProduto() {
+		return nomeProduto;
 	}
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+	public int getCodProd() {
+		return codProd;
+	}
+	public void setCodProd(int codProd) {
+		this.codProd = codProd;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	public int getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}	
 	
 }

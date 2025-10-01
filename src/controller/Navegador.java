@@ -1,4 +1,5 @@
 package controller;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import view.Janela;
 
@@ -25,4 +26,8 @@ public class Navegador {
 	public void sair() {
 		this.janela.dispose();
 	}
+	public void abrirJanela(JFrame janela) {
+		janela.setVisible(true);
+	}
+	
 }
