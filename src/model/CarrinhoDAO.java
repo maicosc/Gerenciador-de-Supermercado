@@ -75,6 +75,7 @@ public class CarrinhoDAO {
         String sql = "UPDATE carrinho SET quantidade = ? WHERE id = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
+       
 
         try {
             conexao = BancoDeDados.conectar();
@@ -89,6 +90,28 @@ public class CarrinhoDAO {
         	BancoDeDados.desconectar(conexao);
         }
     }
+//    public Double valorTotalDoCarrinho(String cpf) {
+//    	String sql = "SUM (valorProduto * quantidade) AS valorTotal FROM carrinho WHERE cpf = ?; ";
+//    	Connection conexao = null;
+//    	PreparedStatement pstm = null;
+//    	ResultSet rset = null;
+//    	double valorTotal = 0.0;
+//    	try {
+//            conexao = BancoDeDados.conectar();
+//            pstm = conexao.prepareStatement(sql);
+//            pstm.setString(1, cpf);
+//            pstm.executeUpdate();
+//            rset = pstm.executeQuery();
+//            valorTotal = rset.getDouble("valorTotal");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//        	BancoDeDados.desconectar(conexao);
+//            
+//        }
+//    	return valorTotal;
+//    }
+    
 
     
     public void excluirProdutoDeCarrinho(int codProd, String cpf) {

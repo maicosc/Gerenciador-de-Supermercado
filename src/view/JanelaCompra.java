@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -19,11 +20,12 @@ import model.Produto;
 public class JanelaCompra extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	
 	private JButton btnDeslogar;
 	private JButton btnCarrinho;
 	private JButton btnAdicionarAoCarrinho;
 	private JList<Produto> listProdutos;
+	private JButton btnNotaFiscal;
 
 
 
@@ -65,10 +67,14 @@ public class JanelaCompra extends JPanel {
 		btnCarrinho.setBounds(747, 11, 49, 41);
 		add(btnCarrinho);
 		
-		listProdutos = new JList();
+		listProdutos = new JList<Produto>();
 		listProdutos.setBounds(43, 94, 554, 426);
+	
 		
-		add(listProdutos);
+		JScrollPane spLista = new JScrollPane();
+		spLista.setBounds(43, 94, 554, 426);
+		spLista.setViewportView(listProdutos);
+		add(spLista);
 		
 		btnAdicionarAoCarrinho = new JButton("Adicionar");
 		btnAdicionarAoCarrinho.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -81,6 +87,12 @@ public class JanelaCompra extends JPanel {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setBounds(74, 29, 541, 54);
 		add(lblTitulo);
+		
+		JButton btnNotaFiscal = new JButton("NOTA FISCAL");
+		btnNotaFiscal.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNotaFiscal.setFont(new Font("Tahoma", Font.BOLD, 24));
+		btnNotaFiscal.setBounds(607, 334, 203, 79);
+		add(btnNotaFiscal);
 	}
 	public void deslogar(ActionListener actionListener) {
 		this.btnDeslogar.addActionListener(actionListener);
@@ -91,6 +103,9 @@ public class JanelaCompra extends JPanel {
 	public void adicionarAoCarrinho(ActionListener actionListener) {
 		this.btnAdicionarAoCarrinho.addActionListener(actionListener);
 	}
+	public void emitirNotaFiscal(ActionListener actionListener) {
+		this.btnNotaFiscal.addActionListener(actionListener);
+	}
 
 	public void setListaModelo(DefaultListModel<Produto> modelo) {
 	    listProdutos.setModel(modelo);
@@ -99,6 +114,4 @@ public class JanelaCompra extends JPanel {
 	public Produto getProdutoSelecionado() {
 	    return listProdutos.getSelectedValue();
 	}
-	
-	
 }

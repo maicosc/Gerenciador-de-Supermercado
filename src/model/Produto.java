@@ -36,5 +36,10 @@ public class Produto {
 		this.codProd = codProd;
 	}
 	
+	@Override
+	public String toString() {
+		
+		return getNomeProd() + "R$ "+String.format("%.2f", getPreco());
+	}
 	
 }

@@ -5,9 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Carrinho;
+import model.Produto;
+
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -30,6 +35,7 @@ public class JanelaCadastroProduto extends JPanel {
 	private JButton btnAtualizarProduto;
 	private JButton btnDeletarProduto;
 	private JButton btnDeslogar;
+	private JList list;
 	
 
 	/**
@@ -55,7 +61,7 @@ public class JanelaCadastroProduto extends JPanel {
 		btnDeslogar.setBounds(10, 11, 49, 41);
 		add(btnDeslogar);
 		
-		JList list = new JList();
+		list = new JList();
 		list.setBounds(491, 39, 290, 464);
 		add(list);
 		
@@ -153,6 +159,9 @@ public class JanelaCadastroProduto extends JPanel {
 	}
 	public void deslogar(ActionListener actionListener) {
 		this.btnDeslogar.addActionListener(actionListener);
+	}
+	public void setListaModeloProduto(DefaultListModel<Produto> modelo) {
+	    list.setModel(modelo);
 	}
 	
 	

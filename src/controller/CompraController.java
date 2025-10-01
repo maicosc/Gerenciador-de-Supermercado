@@ -1,21 +1,27 @@
 package controller;
 
+import java.util.Objects;
+
 import javax.swing.*;
 
 import model.Carrinho;
 import model.CarrinhoDAO;
 import model.Produto;
 import model.ProdutoDAO;
+import model.UsuarioDAO;
 import view.JanelaCarrinho;
 import view.JanelaCompra;
+import view.JanelaLogin;
 import controller.LoginController;
 
 public class CompraController {
 	private final JanelaCompra view;
+	private final JanelaLogin viewUser;
 	private final JanelaCarrinho view2;
 	private final CarrinhoDAO model;
 	private final Navegador navegador;
 	private final ProdutoDAO prodD;
+	private final UsuarioDAO userD;
 	private DefaultListModel<Produto> lstM;
 	private DefaultListModel<Carrinho> lstMC;
 	private LoginController login;
@@ -26,8 +32,12 @@ public class CompraController {
 		this.navegador = navegador;
 		this.view2 = view2;
 		this.prodD = new ProdutoDAO();
+		this.userD = new UsuarioDAO();
+		this.viewUser = new JanelaLogin();
 		lstM = new DefaultListModel<Produto>();
 		lstMC = new DefaultListModel<Carrinho>();
+		String [] opcoes = {"Pagar", "Cancelar"};
+		login = new LoginController(viewUser, userD, navegador);
 		
 		carregarProdutosNaLista();
 
@@ -39,6 +49,8 @@ public class CompraController {
 		this.view.abrirCarrinho(e->{
 			navegador.abrirJanela(view2);
 		});
+		
+//		this.view2.setLblValorTotal("Valor Total: R$ " + valorTotalF());
 
 		this.view2.atualizarProdutoEmCarrinho(e -> {
 
@@ -102,6 +114,13 @@ public class CompraController {
 			int pCodPdt = this.view2.getProdutoSelecionadoCar().getCodProd();
 			model.excluirProdutoDeCarrinho(pCodPdt, login.getSalvaCliente());
 		});
+		
+//		this.view.emitirNotaFiscal(e -> {
+//			int confirmacao = JOptionPane.showOptionDialog(view, stringNotaFiscal(), "Nota Fiscal", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+//			if (confirmacao == JOptionPane.YES_OPTION) {
+//				
+//			}
+//		});
 
 	}
 
@@ -122,5 +141,20 @@ public class CompraController {
 		}
 
 	}
+//	public String stringNotaFiscal() {
+//		String resultado = "";
+//		for (Carrinho c : model.mostrarCarrinho()) {
+//			if(c.getCpf().equals(login.getSalvaCliente())) {
+//				resultado += "\nProduto: " + c.getNomeProduto() +"--------- Quantidade: "+ c.getQuantidade()+"--------- Valor: "+String.format("%.2f", c.getQuantidade()*c.getValorProduto()); 
+//				
+//			}
+//		}
+//		resultado += "\n\n VALOR TOTAL: " + model.valorTotalDoCarrinho(login.getSalvaCliente());
+//		return resultado;
+//	}
+//	public String valorTotalF() {
+//		String valorTotalF = String.format("%.2f", model.valorTotalDoCarrinho(login.getSalvaCliente()));
+//		return valorTotalF;
+//	}
 
 }

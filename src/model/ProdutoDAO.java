@@ -10,7 +10,7 @@ import java.util.List;
 public class ProdutoDAO {
 
 	public void adicionarProduto(Produto produto) {
-        String sql = "INSERT INTO produtos (nomeProduto, preco, quantidade, id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO produtos (nomeProd, preco, quantidade, codProd) VALUES (?, ?, ?, ?)";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
@@ -64,9 +64,28 @@ public class ProdutoDAO {
         }
         return produtos;
     }
+    
+//    public void atualizarQuantidadeProd(int codProd, String cpf, int quantRetirada) {
+//    	
+//    	String sql = "UPDATE produtos SET quantidade = ? WHERE id = ?";
+//    	Connection conexao = null;
+//    	PreparedStatement pstm = null;
+//    	try {
+//            conexao = BancoDeDados.conectar();
+//            pstm = conexao.prepareStatement(sql);
+//            pstm.setInt(1, produto.getQuantidade());
+//            pstm.
+//            pstm.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//        	
+//        	BancoDeDados.desconectar(conexao);
+//        }
+//    }
 
     public void atualizarProduto(Produto produto) {
-        String sql = "UPDATE produtos SET nomeProduto = ?, preco = ?, quantidade = ? WHERE id = ?";
+        String sql = "UPDATE produtos SET nomeProd = ?, preco = ?, quantidade = ? WHERE codProd = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
@@ -87,15 +106,15 @@ public class ProdutoDAO {
     }
 
     
-    public void excluirProduto(int id) {
-        String sql = "DELETE FROM produtos WHERE id = ?";
+    public void excluirProduto(int codProd) {
+        String sql = "DELETE FROM produtos WHERE codProd = ?";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
-            pstm.setInt(1, id);
+            pstm.setInt(1, codProd);
             pstm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

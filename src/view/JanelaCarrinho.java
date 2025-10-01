@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class JanelaCarrinho extends JFrame {
 
@@ -23,6 +25,7 @@ public class JanelaCarrinho extends JFrame {
 	private JButton btnAtualizar;
 	private JButton btnDeletar;
 	private JList<Carrinho> listProdutos;
+	private JLabel lblValorTotal;
 
 	/**
 	 * Launch the application.
@@ -41,7 +44,7 @@ public class JanelaCarrinho extends JFrame {
 		contentPane.setLayout(null);
 
 		listProdutos = new JList();
-		listProdutos.setBounds(36, 27, 427, 243);
+		listProdutos.setBounds(36, 46, 427, 224);
 		contentPane.add(listProdutos);
 
 		btnAtualizar = new JButton("ATUALIZAR");
@@ -53,6 +56,12 @@ public class JanelaCarrinho extends JFrame {
 		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnDeletar.setBounds(309, 281, 154, 42);
 		contentPane.add(btnDeletar);
+		
+		lblValorTotal = new JLabel("Valor Total:");
+		lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblValorTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblValorTotal.setBounds(97, 11, 284, 29);
+		contentPane.add(lblValorTotal);
 	}
 
 	public void atualizarProdutoEmCarrinho(ActionListener actionListener) {
@@ -68,5 +77,7 @@ public class JanelaCarrinho extends JFrame {
 	public Carrinho getProdutoSelecionadoCar() {
 	    return listProdutos.getSelectedValue();
 	}
-
+	public void setLblValorTotal(String texto) {
+		this.lblValorTotal.setText(texto);
+	}
 }
