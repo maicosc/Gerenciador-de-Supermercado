@@ -11,6 +11,7 @@ public class Janela extends JFrame {
 	private CardLayout cardLayout;
 
 	public Janela() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 820, 568);
 		setName("GerenciadorRedeMaik");

@@ -37,20 +37,21 @@ public class CompraController {
 		lstM = new DefaultListModel<Produto>();
 		lstMC = new DefaultListModel<Carrinho>();
 		String [] opcoes = {"Pagar", "Cancelar"};
-		login = new LoginController(viewUser, userD, navegador);
+		
 		
 		carregarProdutosNaLista();
 
 		this.view.setListaModelo(lstM);
 		
-		carregarProdutosNaListaCarrinho();
-		this.view2.setListaModeloCarrinho(lstMC);
+		
 		
 		this.view.abrirCarrinho(e->{
 			navegador.abrirJanela(view2);
+			carregarProdutosNaListaCarrinho();
+			this.view2.setListaModeloCarrinho(lstMC);
 		});
 		
-//		this.view2.setLblValorTotal("Valor Total: R$ " + valorTotalF());
+		this.view2.setLblValorTotal("Valor Total: R$ " + valorTotalF());
 
 		this.view2.atualizarProdutoEmCarrinho(e -> {
 
@@ -68,10 +69,10 @@ public class CompraController {
 						JOptionPane.showMessageDialog(view, "Quantidade selecionada excede a disponível!", "erro",
 								JOptionPane.WARNING_MESSAGE);
 					} else {
-						Carrinho c = new Carrinho(selecionado.getValorProduto(), selecionado.getNomeProduto(), q,
-								selecionado.getCodProd(), login.getSalvaCliente());
-
-						model.atualizarProdutoEmCarrinho(c);
+						
+						model.atualizarProdutoEmCarrinho(q, selecionado.getId());
+						carregarProdutosNaListaCarrinho();
+						this.view2.setListaModeloCarrinho(lstMC);
 					}
 
 				}
@@ -85,7 +86,7 @@ public class CompraController {
 			Produto selecionado = view.getProdutoSelecionado();
 
 			if (selecionado != null) {
-				String quantidade = javax.swing.JOptionPane.showInputDialog(view, "Informe a quantidade:", "Quantidade",
+				String quantidade = JOptionPane.showInputDialog(view, "Informe a quantidade:", "Quantidade",
 						JOptionPane.QUESTION_MESSAGE);
 
 				if (quantidade != null && !quantidade.trim().isEmpty()) {
@@ -97,8 +98,8 @@ public class CompraController {
 								JOptionPane.WARNING_MESSAGE);
 					} else {
 						Carrinho c = new Carrinho(selecionado.getPreco(), selecionado.getNomeProd(), q,
-								selecionado.getCodProd(), login.getSalvaCliente());
-
+								selecionado.getCodProd(), LoginController.getSalvaCliente());
+						System.out.println("Adicionando produto ao carrinho: codProd = " + selecionado.getCodProd());
 						model.adicionarProdutoAoCarrinho(c);
 
 					}
@@ -111,21 +112,21 @@ public class CompraController {
 		});
 		
 		this.view2.deletarProdutoDoCarrinho(e->{
-			int pCodPdt = this.view2.getProdutoSelecionadoCar().getCodProd();
-			model.excluirProdutoDeCarrinho(pCodPdt, login.getSalvaCliente());
+			Carrinho selecionado = view2.getProdutoSelecionadoCar();
+			model.excluirProdutoDeCarrinho(selecionado.getId());
 		});
 		
-//		this.view.emitirNotaFiscal(e -> {
-//			int confirmacao = JOptionPane.showOptionDialog(view, stringNotaFiscal(), "Nota Fiscal", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
-//			if (confirmacao == JOptionPane.YES_OPTION) {
-//				
-//			}
-//		});
+		this.view.emitirNotaFiscal(e -> {
+			int confirmacao = JOptionPane.showOptionDialog(view, stringNotaFiscal(), "Nota Fiscal", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+			if (confirmacao == JOptionPane.YES_OPTION) {
+				stringNotaFiscal();
+			}
+		});
 
 	}
 
 	public void carregarProdutosNaLista() {
-		
+		lstM.clear();
 		for (Produto p : prodD.listarProdutos()) {
 			lstM.addElement(p);
 		}
@@ -133,28 +134,28 @@ public class CompraController {
 	}
 
 	public void carregarProdutosNaListaCarrinho() {
-		
+		lstMC.clear();
 		for (Carrinho c : model.mostrarCarrinho()) {
-			if (c.getCpf().equals(login.getSalvaCliente())) {
+			if (c.getCpf().equals(LoginController.getSalvaCliente())) {
 				lstMC.addElement(c);
 			}
 		}
 
 	}
-//	public String stringNotaFiscal() {
-//		String resultado = "";
-//		for (Carrinho c : model.mostrarCarrinho()) {
-//			if(c.getCpf().equals(login.getSalvaCliente())) {
-//				resultado += "\nProduto: " + c.getNomeProduto() +"--------- Quantidade: "+ c.getQuantidade()+"--------- Valor: "+String.format("%.2f", c.getQuantidade()*c.getValorProduto()); 
-//				
-//			}
-//		}
-//		resultado += "\n\n VALOR TOTAL: " + model.valorTotalDoCarrinho(login.getSalvaCliente());
-//		return resultado;
-//	}
-//	public String valorTotalF() {
-//		String valorTotalF = String.format("%.2f", model.valorTotalDoCarrinho(login.getSalvaCliente()));
-//		return valorTotalF;
-//	}
+	public String stringNotaFiscal() {
+		String resultado = "";
+		for (Carrinho c : model.mostrarCarrinho()) {
+			if(c.getCpf().equals(LoginController.getSalvaCliente())) {
+				resultado += "\nProduto: " + c.getNomeProduto() +"--------- Quantidade: "+ c.getQuantidade()+"--------- Valor: "+String.format("%.2f", c.getQuantidade()*c.getValorProduto()); 
+				
+			}
+		}
+		resultado += "\n\n VALOR TOTAL: " + model.valorTotalDoCarrinho(LoginController.getSalvaCliente());
+		return resultado;
+	}
+	public String valorTotalF() {
+		String valorTotalF = String.format("%.2f", model.valorTotalDoCarrinho(LoginController.getSalvaCliente()));
+		return valorTotalF;
+	}
 
 }

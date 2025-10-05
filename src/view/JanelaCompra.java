@@ -88,7 +88,7 @@ public class JanelaCompra extends JPanel {
 		lblTitulo.setBounds(74, 29, 541, 54);
 		add(lblTitulo);
 		
-		JButton btnNotaFiscal = new JButton("NOTA FISCAL");
+		btnNotaFiscal = new JButton("NOTA FISCAL");
 		btnNotaFiscal.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNotaFiscal.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnNotaFiscal.setBounds(607, 334, 203, 79);

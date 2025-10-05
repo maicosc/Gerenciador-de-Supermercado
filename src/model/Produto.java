@@ -6,7 +6,11 @@ public class Produto {
 	private int quantidade, codProd;
 	private String nomeProd;
 	public Produto(String nomeProd, int quantidade, double preco, int codProd) {
-		// TODO Auto-generated constructor stub
+		
+		this.nomeProd = nomeProd;
+        this.quantidade = quantidade;
+        this.preco = preco;
+        this.codProd = codProd;
 	}
 	public Produto() {
 		// TODO Auto-generated constructor stub
@@ -39,7 +43,7 @@ public class Produto {
 	@Override
 	public String toString() {
 		
-		return getNomeProd() + "R$ "+String.format("%.2f", getPreco());
+		return getNomeProd() + "------------------ R$ "+String.format("%.2f", getPreco());
 	}
 	
 }

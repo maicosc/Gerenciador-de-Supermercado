@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import model.Usuario;
 import model.UsuarioDAO;
 import view.JanelaLogin;
@@ -8,7 +11,7 @@ public class LoginController {
 	private final JanelaLogin view;
 	private final UsuarioDAO model;
 	private final Navegador navegador;
-	private String salvaCliente;
+	private static String salvaCliente;
 
 	public LoginController(JanelaLogin view, UsuarioDAO model, Navegador navegador) {
 		this.view = view;
@@ -36,21 +39,21 @@ public class LoginController {
 
 			}
 		});
-		this.view.irParaCadastro(new java.awt.event.MouseAdapter() {
+		this.view.irParaCadastro(new MouseAdapter() {
 			@Override
-			public void mouseClicked(java.awt.event.MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 
 				navegador.navegarPara("CADASTRO");
 			}
 		});
 	}
 
-	public String getSalvaCliente() {
+	public static String getSalvaCliente() {
 		return salvaCliente;
 	}
 
-	public void setSalvaCliente(String salvaCliente) {
-		this.salvaCliente = salvaCliente;
+	public static void setSalvaCliente(String salvaCli) {
+		salvaCliente = salvaCli;
 	}
 
 }

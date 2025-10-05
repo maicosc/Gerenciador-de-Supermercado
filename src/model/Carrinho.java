@@ -7,7 +7,11 @@ public class Carrinho {
 	private String nomeProduto, cpf;
 	private int codProd, quantidade;
 	public Carrinho( double valorProduto, String nomeProduto, int quantidade, int codProd, String cpf) {
-		
+		this.quantidade = quantidade;
+		this.codProd = codProd;
+		this.cpf =cpf;
+		this.nomeProduto = nomeProduto;
+		this.valorProduto = valorProduto;
 	}
 	
 	public Carrinho() {
@@ -50,6 +54,12 @@ public class Carrinho {
 	}
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
-	}	
+	}
+	
+	@Override
+	public String toString() {
+		
+		return getNomeProduto() +" Quantidade: "+ getQuantidade()+" R$ "+String.format("%.2f", getValorProduto()*getQuantidade());
+	}
 	
 }

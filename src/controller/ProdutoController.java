@@ -17,6 +17,10 @@ public class ProdutoController {
 		this.model = model;
 		this.navegador = navegador;
 		lstM = new DefaultListModel<Produto>();
+		
+		carregarProdutosNaLista();
+
+		this.view.setListaModeloProduto(lstM);
 
 		this.view.cadastrarProduto(e -> {
 			String nomeProduto = view.getTfNomeProduto();
@@ -24,7 +28,7 @@ public class ProdutoController {
 			String preco = view.getTfPreco();
 			String codProd = view.getTfCodProd();
 
-			if (!nomeProduto.equals("") && !quantidade.equals("") && !preco.equals("") && !codProd.equals("")) {
+			if (!nomeProduto.trim().isEmpty()&& !quantidade.trim().isEmpty() && !preco.trim().isEmpty() && !codProd.trim().isEmpty()) {
 
 				Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
 						Integer.parseInt(codProd));
@@ -60,7 +64,7 @@ public class ProdutoController {
 	}
 
 	public void carregarProdutosNaLista() {
-
+		lstM.clear();
 		for (Produto p : model.listarProdutos()) {
 			lstM.addElement(p);
 		}

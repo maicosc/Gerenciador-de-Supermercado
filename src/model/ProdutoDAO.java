@@ -10,15 +10,15 @@ import java.util.List;
 public class ProdutoDAO {
 
 	public void adicionarProduto(Produto produto) {
-        String sql = "INSERT INTO produtos (nomeProd, preco, quantidade, codProd) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO produtos (preco, nomeProd, quantidade, codProd) VALUES (?, ?, ?, ?)";
         Connection conexao = null;
         PreparedStatement pstm = null;
 
         try {
             conexao = BancoDeDados.conectar();
             pstm = conexao.prepareStatement(sql);
-            pstm.setString(1, produto.getNomeProd());
-            pstm.setDouble(2, produto.getPreco());
+            pstm.setString(2, produto.getNomeProd());
+            pstm.setDouble(1, produto.getPreco());
             pstm.setInt(3, produto.getQuantidade());
             pstm.setInt(4, produto.getCodProd());
             pstm.executeUpdate();
@@ -51,9 +51,10 @@ public class ProdutoDAO {
 
             while (rset.next()) {
                 Produto produto = new Produto();
-                produto.setNomeProd(rset.getString("nomeProduto"));
+                produto.setNomeProd(rset.getString("nomeProd"));
                 produto.setPreco(rset.getDouble("preco"));
                 produto.setQuantidade(rset.getInt("quantidade"));
+                produto.setCodProd(rset.getInt("codProd"));
                 produtos.add(produto);
             }
         } catch (SQLException e) {

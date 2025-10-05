@@ -26,8 +26,9 @@ public class Navegador {
 	public void sair() {
 		this.janela.dispose();
 	}
-	public void abrirJanela(JFrame janela) {
-		janela.setVisible(true);
+	public void abrirJanela(JFrame jan) {
+		jan.setVisible(true);
+		jan.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 }
