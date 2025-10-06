@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class JanelaCarrinho extends JFrame {
 
@@ -38,6 +40,7 @@ public class JanelaCarrinho extends JFrame {
 		
 		setBounds(100, 100, 510, 373);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(234, 253, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -47,12 +50,14 @@ public class JanelaCarrinho extends JFrame {
 		listProdutos.setBounds(36, 46, 427, 224);
 		contentPane.add(listProdutos);
 
-		btnAtualizar = new JButton("ATUALIZAR");
+		btnAtualizar = new JButton("");
+		btnAtualizar.setIcon(new ImageIcon(JanelaCarrinho.class.getResource("/images/AtualizarCarrinho.png")));
 		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAtualizar.setBounds(36, 281, 154, 42);
 		contentPane.add(btnAtualizar);
 
-		btnDeletar = new JButton("DELETAR");
+		btnDeletar = new JButton("");
+		btnDeletar.setIcon(new ImageIcon(JanelaCarrinho.class.getResource("/images/DeletarNoCarrinho.png")));
 		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnDeletar.setBounds(309, 281, 154, 42);
 		contentPane.add(btnDeletar);

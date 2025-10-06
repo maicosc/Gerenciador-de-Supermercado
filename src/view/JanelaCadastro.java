@@ -54,16 +54,17 @@ public class JanelaCadastro extends JPanel {
 		add(lblNomaInc);
 		
 		JLabel lblSlogan = new JLabel("Sempre do seu lado");
+		lblSlogan.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblSlogan.setForeground(new Color(0, 0, 0));
 		lblSlogan.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSlogan.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblSlogan.setBounds(10, 49, 132, 14);
+		lblSlogan.setBounds(50, 44, 132, 14);
 		add(lblSlogan);
 		
 		tfNome = new JTextField();
 		tfNome.setName("Nome");
 		tfNome.setToolTipText("Nome");
-		tfNome.setBounds(125, 116, 567, 40);
+		tfNome.setBounds(152, 133, 567, 40);
 		
 			  
 		add(tfNome);
@@ -74,24 +75,26 @@ public class JanelaCadastro extends JPanel {
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(125, 182, 567, 40);
+		tfCpf.setBounds(152, 182, 567, 40);
 		
 		add(tfCpf);
 		
-		btnCadastrar = new JButton("CADASTRAR");
+		btnCadastrar = new JButton("");
+		btnCadastrar.setBorderPainted(false);
+		btnCadastrar.setIcon(new ImageIcon(JanelaCadastro.class.getResource("/images/Cadastrar.png")));
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnCadastrar.setEnabled(true);
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(255, 0, 0));
-		btnCadastrar.setBounds(271, 328, 264, 50);
+		btnCadastrar.setBounds(287, 327, 264, 50);
 		
 		add(btnCadastrar);
 		
 		JLabel lblEmpresa = new JLabel("Maker by Cybernooste Technologies Solutions");
-		lblEmpresa.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		lblEmpresa.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblEmpresa.setBounds(185, 483, 389, 37);
+		lblEmpresa.setBounds(226, 471, 389, 37);
 		add(lblEmpresa);
 		
 		JLabel lblIcon = new JLabel("New label");
@@ -102,13 +105,13 @@ public class JanelaCadastro extends JPanel {
 		rdbtnAdm = new JRadioButton("Administrador");
 		rdbtnAdm.setBackground(new Color(234, 253, 255));
 		rdbtnAdm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rdbtnAdm.setBounds(240, 256, 141, 37);
+		rdbtnAdm.setBounds(289, 256, 141, 37);
 		add(rdbtnAdm);
 		
 		rdbtnCliente = new JRadioButton("Cliente");
 		rdbtnCliente.setBackground(new Color(234, 253, 255));
 		rdbtnCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rdbtnCliente.setBounds(447, 256, 141, 37);
+		rdbtnCliente.setBounds(453, 256, 141, 37);
 		add(rdbtnCliente);
 		
 		grupo = new ButtonGroup();
@@ -119,12 +122,12 @@ public class JanelaCadastro extends JPanel {
 		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNome.setBounds(54, 115, 74, 37);
+		lblNome.setBounds(77, 136, 74, 37);
 		add(lblNome);
 		
 		JLabel lblCPF = new JLabel("CPF:");
 		lblCPF.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblCPF.setBounds(60, 181, 61, 37);
+		lblCPF.setBounds(92, 185, 61, 37);
 		add(lblCPF);
 	}
 	public void cadastrar(ActionListener actionListener) {

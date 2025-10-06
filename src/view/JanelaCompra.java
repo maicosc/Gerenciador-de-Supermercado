@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import model.Produto;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class JanelaCompra extends JPanel {
 
@@ -49,6 +51,7 @@ public class JanelaCompra extends JPanel {
 	 * Create the frame.
 	 */
 	public JanelaCompra() {
+		setBackground(new Color(234, 253, 255));
 		
 		setBounds(100, 100, 820, 568);
 		
@@ -59,12 +62,16 @@ public class JanelaCompra extends JPanel {
 		
 		
 		
-		btnDeslogar = new JButton("Deslogar");
-		btnDeslogar.setBounds(10, 11, 49, 41);
+		btnDeslogar = new JButton("");
+		btnDeslogar.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-sair-50.png")));
+		btnDeslogar.setBounds(10, 11, 50, 50);
 		add(btnDeslogar);
 		
-		btnCarrinho = new JButton("Carrinho");
-		btnCarrinho.setBounds(747, 11, 49, 41);
+		btnCarrinho = new JButton("");
+		btnCarrinho.setBackground(new Color(234, 253, 255));
+		btnCarrinho.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCarrinho.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-carrinho-de-compras-50 (2).png")));
+		btnCarrinho.setBounds(747, 11, 50, 50);
 		add(btnCarrinho);
 		
 		listProdutos = new JList<Produto>();
@@ -76,16 +83,16 @@ public class JanelaCompra extends JPanel {
 		spLista.setViewportView(listProdutos);
 		add(spLista);
 		
-		btnAdicionarAoCarrinho = new JButton("Adicionar");
+		btnAdicionarAoCarrinho = new JButton("ADICIONAR");
 		btnAdicionarAoCarrinho.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnAdicionarAoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 24));
-		btnAdicionarAoCarrinho.setBounds(607, 232, 189, 79);
+		btnAdicionarAoCarrinho.setBounds(607, 232, 203, 79);
 		add(btnAdicionarAoCarrinho);
 		
 		JLabel lblTitulo = new JLabel("Compra de Produtos");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 27));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(74, 29, 541, 54);
+		lblTitulo.setBounds(126, 7, 541, 54);
 		add(lblTitulo);
 		
 		btnNotaFiscal = new JButton("NOTA FISCAL");

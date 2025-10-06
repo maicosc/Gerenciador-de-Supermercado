@@ -22,6 +22,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class JanelaCadastroProduto extends JPanel {
 
@@ -47,6 +49,7 @@ public class JanelaCadastroProduto extends JPanel {
 	 * Create the frame.
 	 */
 	public JanelaCadastroProduto() {
+		setBackground(new Color(234, 253, 255));
 		
 		setBounds(100, 100, 820, 568);
 		
@@ -57,8 +60,10 @@ public class JanelaCadastroProduto extends JPanel {
 		
 		
 		
-		btnDeslogar = new JButton("Deslogar");
-		btnDeslogar.setBounds(10, 11, 49, 41);
+		btnDeslogar = new JButton("");
+		btnDeslogar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnDeslogar.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/icons8-sair-50.png")));
+		btnDeslogar.setBounds(10, 11, 50, 50);
 		add(btnDeslogar);
 		
 		list = new JList();
@@ -85,19 +90,23 @@ public class JanelaCadastroProduto extends JPanel {
 		tfCodProd.setBounds(207, 240, 112, 37);
 		add(tfCodProd);
 		
-		btnAdicionarProduto = new JButton("ADICIONAR");
+		btnAdicionarProduto = new JButton("");
+		btnAdicionarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/Adicionar.png")));
 		btnAdicionarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnAdicionarProduto.setBounds(85, 308, 224, 43);
+		btnAdicionarProduto.setBounds(95, 394, 224, 43);
 		add(btnAdicionarProduto);
 		
-		btnAtualizarProduto = new JButton("ATUALIZAR");
+		btnAtualizarProduto = new JButton("");
+		btnAtualizarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/AtualizarProduto.png")));
 		btnAtualizarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnAtualizarProduto.setBounds(85, 375, 224, 43);
+		btnAtualizarProduto.setBounds(95, 448, 224, 43);
 		add(btnAtualizarProduto);
 		
-		btnDeletarProduto = new JButton("DELETAR");
+		btnDeletarProduto = new JButton("");
+		btnDeletarProduto.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnDeletarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/DeletarProduto.png")));
 		btnDeletarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnDeletarProduto.setBounds(85, 440, 224, 43);
+		btnDeletarProduto.setBounds(95, 502, 224, 43);
 		add(btnDeletarProduto);
 		
 		JLabel lblNomeProduto = new JLabel("Nome do Produto:");
@@ -123,7 +132,7 @@ public class JanelaCadastroProduto extends JPanel {
 		JLabel lblTitulo = new JLabel("Cadastro de Produto");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(31, 39, 425, 37);
+		lblTitulo.setBounds(93, 11, 389, 37);
 		add(lblTitulo);
 	}
 
