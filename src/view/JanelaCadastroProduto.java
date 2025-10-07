@@ -93,20 +93,20 @@ public class JanelaCadastroProduto extends JPanel {
 		btnAdicionarProduto = new JButton("");
 		btnAdicionarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/Adicionar.png")));
 		btnAdicionarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnAdicionarProduto.setBounds(95, 394, 224, 43);
+		btnAdicionarProduto.setBounds(95, 323, 224, 43);
 		add(btnAdicionarProduto);
 		
 		btnAtualizarProduto = new JButton("");
 		btnAtualizarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/AtualizarProduto.png")));
 		btnAtualizarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnAtualizarProduto.setBounds(95, 448, 224, 43);
+		btnAtualizarProduto.setBounds(95, 377, 224, 43);
 		add(btnAtualizarProduto);
 		
 		btnDeletarProduto = new JButton("");
 		btnDeletarProduto.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnDeletarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/DeletarProduto.png")));
 		btnDeletarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnDeletarProduto.setBounds(95, 502, 224, 43);
+		btnDeletarProduto.setBounds(95, 431, 224, 43);
 		add(btnDeletarProduto);
 		
 		JLabel lblNomeProduto = new JLabel("Nome do Produto:");

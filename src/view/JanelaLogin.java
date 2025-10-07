@@ -79,30 +79,32 @@ public class JanelaLogin extends JPanel {
 		
 		add(tfCpf);
 		
-		btnEntrar = new JButton("ENTRAR");
+		btnEntrar = new JButton("");
+		btnEntrar.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/Entrar.png")));
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnEntrar.setForeground(new Color(255, 255, 255));
 		btnEntrar.setBackground(new Color(255, 0, 0));
-		btnEntrar.setBounds(315, 339, 175, 57);
+		btnEntrar.setBounds(277, 338, 264, 50);
 		
 		add(btnEntrar);
 		
 		JLabel lblNewLabel_3 = new JLabel("Não possui cadastro?");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_3.setBounds(261, 422, 123, 14);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_3.setBounds(287, 400, 165, 14);
 		add(lblNewLabel_3);
 		
 		lblCadastro = new JLabel("Cadastrar");
-		lblCadastro.setForeground(new Color(0, 128, 128));
-		lblCadastro.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblCadastro.setBounds(394, 420, 56, 16);
+		lblCadastro.setBackground(new Color(0, 128, 255));
+		lblCadastro.setForeground(new Color(0, 128, 255));
+		lblCadastro.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblCadastro.setBounds(458, 399, 83, 16);
 		add(lblCadastro);
 		
 		JLabel lblNewLabel_5 = new JLabel("Maker by Cybernooste Technologies Solutions");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.ITALIC, 9));
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblNewLabel_5.setBounds(315, 518, 187, 11);
+		lblNewLabel_5.setBounds(270, 511, 271, 11);
 		add(lblNewLabel_5);
 		
 		JLabel lblNewLabel = new JLabel("");

@@ -129,6 +129,18 @@ public class JanelaCadastro extends JPanel {
 		lblCPF.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblCPF.setBounds(92, 185, 61, 37);
 		add(lblCPF);
+		
+		JLabel lblNewLabel = new JLabel("Voltar para");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setBounds(307, 388, 133, 23);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("login!");
+		lblNewLabel_1.setForeground(new Color(0, 128, 255));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_1.setBounds(443, 388, 80, 23);
+		add(lblNewLabel_1);
 	}
 	public void cadastrar(ActionListener actionListener) {
 		this.btnCadastrar.addActionListener(actionListener);
@@ -164,5 +176,4 @@ public class JanelaCadastro extends JPanel {
 		rdbtnAdm.setSelected(false);
 		rdbtnCliente.setSelected(false);
 	}
-	
 }
