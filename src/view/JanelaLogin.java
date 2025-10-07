@@ -23,6 +23,9 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class JanelaLogin extends JPanel {
 
@@ -65,6 +68,11 @@ public class JanelaLogin extends JPanel {
 		add(lblNewLabel_2);
 		
 		tfNome = new JTextField();
+		tfNome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
 		tfNome.setName("");
 		tfNome.setToolTipText("Nome");
 		tfNome.setBounds(179, 159, 487, 37);
@@ -72,6 +80,7 @@ public class JanelaLogin extends JPanel {
 		tfNome.setColumns(10);
 		
 		tfCpf = new JTextField();
+		tfCpf.setEnabled(false);
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);
 		tfCpf.setColumns(10);
@@ -80,6 +89,7 @@ public class JanelaLogin extends JPanel {
 		add(tfCpf);
 		
 		btnEntrar = new JButton("");
+		btnEntrar.setEnabled(false);
 		btnEntrar.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/Entrar.png")));
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnEntrar.setForeground(new Color(255, 255, 255));
@@ -140,6 +150,21 @@ public class JanelaLogin extends JPanel {
 	public void limparFormulario() {
 		this.tfNome.setText("");
 		this.tfCpf.setText("");
+	}
+	public JTextField getTfNome() {
+		return this.tfNome;
+	}
+	public JTextField getTfCpf() {
+		return this.tfCpf;
+	}
+	public JButton getBotaoEntrar() {
+		return this.btnEntrar;
+	}
+	public void ativaCpf(KeyListener kLis) {
+		this.tfNome.addKeyListener(kLis);
+	}
+	public void ativaBotao(KeyListener kLis) {
+		this.tfCpf.addKeyListener(kLis);
 	}
 	public void irParaCadastro(MouseListener mouseListener) {
 		this.lblCadastro.addMouseListener(mouseListener);

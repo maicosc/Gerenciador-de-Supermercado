@@ -98,7 +98,7 @@ public class CompraController {
 								JOptionPane.WARNING_MESSAGE);
 					} else {
 						Carrinho c = new Carrinho(selecionado.getPreco(), selecionado.getNomeProd(), q,
-								selecionado.getCodProd(), LoginController.getSalvaCliente());
+								selecionado.getCodProd(), navegador.getCpf());
 						System.out.println("Adicionando produto ao carrinho: codProd = " + selecionado.getCodProd());
 						model.adicionarProdutoAoCarrinho(c);
 
@@ -136,25 +136,25 @@ public class CompraController {
 	public void carregarProdutosNaListaCarrinho() {
 		lstMC.clear();
 		for (Carrinho c : model.mostrarCarrinho()) {
-			if (c.getCpf().equals(LoginController.getSalvaCliente())) {
+			if (c.getCpf().equals(navegador.getCpf())) {
 				lstMC.addElement(c);
 			}
 		}
 
 	}
 	public String stringNotaFiscal() {
-		String resultado = "";
+		String resultado = "Cliente: "+navegador.getNome()+"------------------ CPF: "+navegador.getCpf()+"\n\n";
 		for (Carrinho c : model.mostrarCarrinho()) {
-			if(c.getCpf().equals(LoginController.getSalvaCliente())) {
+			if(c.getCpf().equals(navegador.getCpf())) {
 				resultado += "\nProduto: " + c.getNomeProduto() +"--------- Quantidade: "+ c.getQuantidade()+"--------- Valor: "+String.format("%.2f", c.getQuantidade()*c.getValorProduto()); 
 				
 			}
 		}
-		resultado += "\n\n VALOR TOTAL: " + model.valorTotalDoCarrinho(LoginController.getSalvaCliente());
+		resultado += "\n\n VALOR TOTAL: " + valorTotalF();
 		return resultado;
 	}
 	public String valorTotalF() {
-		String valorTotalF = String.format("%.2f", model.valorTotalDoCarrinho(LoginController.getSalvaCliente()));
+		String valorTotalF = String.format("%.2f", model.valorTotalDoCarrinho(navegador.getCpf()));
 		return valorTotalF;
 	}
 
