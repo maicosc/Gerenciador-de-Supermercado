@@ -117,6 +117,7 @@ public class LoginController {
 
 		navegador.navegarPara("CADASTRO");
 	}
-});}
+});
+		}
 
 }

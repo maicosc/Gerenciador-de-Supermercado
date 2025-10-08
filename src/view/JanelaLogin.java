@@ -55,17 +55,17 @@ public class JanelaLogin extends JPanel {
 
 		
 		
-		JLabel lblNewLabel_1 = new JLabel("REDE MAIK");
-		lblNewLabel_1.setForeground(new Color(255, 0, 0));
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(93, 11, 104, 22);
-		add(lblNewLabel_1);
+		JLabel lblMercado = new JLabel("REDE MAIK");
+		lblMercado.setForeground(new Color(255, 0, 0));
+		lblMercado.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblMercado.setBounds(77, 11, 104, 22);
+		add(lblMercado);
 		
-		JLabel lblNewLabel_2 = new JLabel("Sempre do seu lado");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(93, 44, 97, 14);
-		add(lblNewLabel_2);
+		JLabel lblSlogan = new JLabel("Sempre do seu lado");
+		lblSlogan.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSlogan.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblSlogan.setBounds(77, 37, 123, 14);
+		add(lblSlogan);
 		
 		tfNome = new JTextField();
 		tfNome.addKeyListener(new KeyAdapter() {
@@ -98,10 +98,10 @@ public class JanelaLogin extends JPanel {
 		
 		add(btnEntrar);
 		
-		JLabel lblNewLabel_3 = new JLabel("Não possui cadastro?");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_3.setBounds(287, 400, 165, 14);
-		add(lblNewLabel_3);
+		JLabel lblTextCadastro = new JLabel("Não possui cadastro?");
+		lblTextCadastro.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblTextCadastro.setBounds(287, 400, 165, 14);
+		add(lblTextCadastro);
 		
 		lblCadastro = new JLabel("Cadastrar");
 		lblCadastro.setBackground(new Color(0, 128, 255));
@@ -110,12 +110,12 @@ public class JanelaLogin extends JPanel {
 		lblCadastro.setBounds(458, 399, 83, 16);
 		add(lblCadastro);
 		
-		JLabel lblNewLabel_5 = new JLabel("Maker by Cybernooste Technologies Solutions");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblNewLabel_5.setBounds(270, 511, 271, 11);
-		add(lblNewLabel_5);
+		JLabel lblEmpresa = new JLabel("Maker by Cybernooste Technologies Solutions");
+		lblEmpresa.setFont(new Font("Tahoma", Font.ITALIC, 12));
+		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblEmpresa.setBounds(270, 511, 271, 11);
+		add(lblEmpresa);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/LogoSuperMercado.png")));

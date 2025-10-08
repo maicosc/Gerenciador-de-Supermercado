@@ -13,8 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import com.sun.jdi.event.Event;
+
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.awt.Component;
 import javax.swing.JRadioButton;
 
@@ -28,6 +35,7 @@ public class JanelaCadastro extends JPanel {
 	private String tipoUser;
 	private ButtonGroup grupo;
 	private JRadioButton rdbtnCliente, rdbtnAdm;
+	private JLabel lblLogin;
 	
 
 	/**
@@ -71,7 +79,7 @@ public class JanelaCadastro extends JPanel {
 		tfNome.setColumns(10);
 		
 		tfCpf = new JTextField();
-		tfCpf.setEnabled(true);
+		tfCpf.setEnabled(false);
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);
 		tfCpf.setColumns(10);
@@ -83,10 +91,10 @@ public class JanelaCadastro extends JPanel {
 		btnCadastrar.setBorderPainted(false);
 		btnCadastrar.setIcon(new ImageIcon(JanelaCadastro.class.getResource("/images/Cadastrar.png")));
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnCadastrar.setEnabled(true);
+		btnCadastrar.setEnabled(false);
 		btnCadastrar.setForeground(new Color(255, 255, 255));
 		btnCadastrar.setBackground(new Color(255, 0, 0));
-		btnCadastrar.setBounds(287, 327, 264, 50);
+		btnCadastrar.setBounds(289, 324, 264, 50);
 		
 		add(btnCadastrar);
 		
@@ -103,12 +111,14 @@ public class JanelaCadastro extends JPanel {
 		add(lblIcon);
 		
 		rdbtnAdm = new JRadioButton("Administrador");
+		rdbtnAdm.setEnabled(false);
 		rdbtnAdm.setBackground(new Color(234, 253, 255));
 		rdbtnAdm.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnAdm.setBounds(289, 256, 141, 37);
 		add(rdbtnAdm);
 		
 		rdbtnCliente = new JRadioButton("Cliente");
+		rdbtnCliente.setEnabled(false);
 		rdbtnCliente.setBackground(new Color(234, 253, 255));
 		rdbtnCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnCliente.setBounds(453, 256, 141, 37);
@@ -130,17 +140,17 @@ public class JanelaCadastro extends JPanel {
 		lblCPF.setBounds(92, 185, 61, 37);
 		add(lblCPF);
 		
-		JLabel lblNewLabel = new JLabel("Voltar para");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel.setBounds(307, 388, 133, 23);
-		add(lblNewLabel);
+		JLabel lblTextLogin = new JLabel("Voltar para");
+		lblTextLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTextLogin.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblTextLogin.setBounds(307, 388, 133, 23);
+		add(lblTextLogin);
 		
-		JLabel lblNewLabel_1 = new JLabel("login!");
-		lblNewLabel_1.setForeground(new Color(0, 128, 255));
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(443, 388, 80, 23);
-		add(lblNewLabel_1);
+		lblLogin = new JLabel("login!");
+		lblLogin.setForeground(new Color(0, 128, 255));
+		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblLogin.setBounds(443, 388, 80, 23);
+		add(lblLogin);
 	}
 	public void cadastrar(ActionListener actionListener) {
 		this.btnCadastrar.addActionListener(actionListener);
@@ -157,6 +167,23 @@ public class JanelaCadastro extends JPanel {
 	public void setCpf() {
 		this.tfCpf.setText("");
 	}
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+	public JTextField getTfCpf() {
+		return tfCpf;
+	}
+	public JRadioButton getRAdmin() {
+		return rdbtnAdm;
+	}
+	public JRadioButton getRCliente() {
+		return rdbtnCliente;
+	}
+	
+	public JButton getBtnCadastro() {
+		return btnCadastrar;
+	}
+	
 	public String getTipoUser() {
 		if(rdbtnAdm.isSelected()) {
 			return "ADMINISTRADOR";
@@ -170,10 +197,21 @@ public class JanelaCadastro extends JPanel {
 	public void setTipoUser(String text) {
 		this.tipoUser = text;
 	}
+	public void ativaCpf(KeyListener kLis) {
+		this.tfNome.addKeyListener(kLis);
+	}
+	
+	public void ativaRButtons(KeyListener kLis) {
+		this.tfCpf.addKeyListener(kLis);
+	}
+	
 	public void limparFormulario() {
 		this.tfNome.setText("");
 		this.tfCpf.setText("");
 		rdbtnAdm.setSelected(false);
 		rdbtnCliente.setSelected(false);
+	}
+	public void irParaLogin(MouseListener mouseListener) {
+		this.lblLogin.addMouseListener(mouseListener);
 	}
 }
