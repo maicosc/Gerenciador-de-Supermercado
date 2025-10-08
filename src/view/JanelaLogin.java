@@ -89,6 +89,7 @@ public class JanelaLogin extends JPanel {
 		add(tfCpf);
 		
 		btnEntrar = new JButton("");
+		btnEntrar.setBorderPainted(false);
 		btnEntrar.setEnabled(false);
 		btnEntrar.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/Entrar.png")));
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 24));

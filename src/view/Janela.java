@@ -15,6 +15,7 @@ public class Janela extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 820, 568);
 		setName("GerenciadorRedeMaik");
+		setTitle("Rede Maik");
 
 		this.cardLayout = new CardLayout();
 

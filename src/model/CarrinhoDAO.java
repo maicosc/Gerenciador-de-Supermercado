@@ -131,4 +131,20 @@ public class CarrinhoDAO {
 			BancoDeDados.desconectar(conexao);
 		}
 	}
+	public void excluirTodosProdutosDeCarrinho(String cpf) {
+		String sql = "DELETE FROM carrinho WHERE cpf = ?";
+		Connection conexao = null;
+		PreparedStatement pstm = null;
+
+		try {
+			conexao = BancoDeDados.conectar();
+			pstm = conexao.prepareStatement(sql);
+			pstm.setString(1, cpf);
+			pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			BancoDeDados.desconectar(conexao);
+		}
+	}
 }

@@ -65,25 +65,53 @@ public class ProdutoDAO {
         }
         return produtos;
     }
+    public Produto getProduto(int codProd) {
+        String sql = "SELECT * FROM produtos WHERE codProd= ?";
+        Produto produto = new Produto();
+        Connection conexao = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+
+        try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setInt(1, codProd);
+            rset = pstm.executeQuery();
+            while(rset.next()) {
+            	produto.setNomeProd(rset.getString("nomeProd"));
+                produto.setPreco(rset.getDouble("preco"));
+                produto.setQuantidade(rset.getInt("quantidade"));
+                produto.setCodProd(rset.getInt("codProd"));
+            }
+            
+               
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	BancoDeDados.desconectar(conexao);
+            
+        }
+        return produto;
+    }
     
-//    public void atualizarQuantidadeProd(int codProd, String cpf, int quantRetirada) {
-//    	
-//    	String sql = "UPDATE produtos SET quantidade = ? WHERE id = ?";
-//    	Connection conexao = null;
-//    	PreparedStatement pstm = null;
-//    	try {
-//            conexao = BancoDeDados.conectar();
-//            pstm = conexao.prepareStatement(sql);
-//            pstm.setInt(1, produto.getQuantidade());
-//            pstm.
-//            pstm.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//        	
-//        	BancoDeDados.desconectar(conexao);
-//        }
-//    }
+    public void atualizarQuantidadeProd(int codProd, int quantRetirada) {
+    	
+    	String sql = "UPDATE produtos SET quantidade = ? WHERE codProd = ?";
+    	Connection conexao = null;
+    	PreparedStatement pstm = null;
+    	try {
+            conexao = BancoDeDados.conectar();
+            pstm = conexao.prepareStatement(sql);
+            pstm.setInt(1, quantRetirada);
+            pstm.setInt(2, codProd);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	
+        	BancoDeDados.desconectar(conexao);
+        }
+    }
 
     public void atualizarProduto(Produto produto) {
         String sql = "UPDATE produtos SET nomeProd = ?, preco = ?, quantidade = ? WHERE codProd = ?";

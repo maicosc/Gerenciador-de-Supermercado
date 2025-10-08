@@ -39,6 +39,7 @@ public class JanelaCarrinho extends JFrame {
 	public JanelaCarrinho() {
 		
 		setBounds(100, 100, 510, 373);
+		setTitle("Carrinho");
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(234, 253, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,18 +52,20 @@ public class JanelaCarrinho extends JFrame {
 		contentPane.add(listProdutos);
 
 		btnAtualizar = new JButton("");
+		btnAtualizar.setBorderPainted(false);
 		btnAtualizar.setIcon(new ImageIcon(JanelaCarrinho.class.getResource("/images/AtualizarCarrinho.png")));
 		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAtualizar.setBounds(36, 281, 154, 42);
 		contentPane.add(btnAtualizar);
 
 		btnDeletar = new JButton("");
+		btnDeletar.setBorderPainted(false);
 		btnDeletar.setIcon(new ImageIcon(JanelaCarrinho.class.getResource("/images/DeletarNoCarrinho.png")));
 		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnDeletar.setBounds(309, 281, 154, 42);
 		contentPane.add(btnDeletar);
 		
-		lblValorTotal = new JLabel("Valor Total:");
+		lblValorTotal = new JLabel();
 		lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblValorTotal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblValorTotal.setBounds(97, 11, 284, 29);
@@ -85,4 +88,9 @@ public class JanelaCarrinho extends JFrame {
 	public void setLblValorTotal(String texto) {
 		this.lblValorTotal.setText(texto);
 	}
+
+	public JList<Carrinho> getListProdutos() {
+		return listProdutos;
+	}
+	
 }

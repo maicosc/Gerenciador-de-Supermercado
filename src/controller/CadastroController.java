@@ -37,9 +37,20 @@ public class CadastroController {
 				
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (!nome.trim().isEmpty()) {
-						
-								tfCpf.setEnabled(true);
-								tfCpf.requestFocus();				
+						boolean existe =false;
+						for (Usuario usuario : model.listarUsuarios()) {
+							if (usuario.getNome().equalsIgnoreCase(nome)) {
+								existe =true;
+							}
+						}
+						if(existe) {
+							
+							JOptionPane.showMessageDialog(tfNome, "Já existe um usuário com este nome ", "Usuario existente", JOptionPane.ERROR_MESSAGE);
+						}else {
+							tfCpf.setEnabled(true);
+							tfCpf.requestFocus();	
+						}
+											
 					} else {
 						JOptionPane.showMessageDialog(tfNome, "Digite seu nome!", "Campo Vazio", JOptionPane.ERROR_MESSAGE);
 					}
@@ -57,10 +68,22 @@ public class CadastroController {
 						
 							if(cpf.matches("\\d{11}")) {
 								
-										rAdm.setEnabled(true);
-										rCliente.setEnabled(true);
+								boolean existe =false;
+								for (Usuario usuario : model.listarUsuarios()) {
+									if (usuario.getCpf().equals(cpf)) {
+										existe =true;
+									}
+								}
+								if(existe) {
+									
+									JOptionPane.showMessageDialog(tfCpf, "Já existe um usuário com este CPF ", "Usuario existente", JOptionPane.ERROR_MESSAGE);
+								}else {
+									rAdm.setEnabled(true);
+									rCliente.setEnabled(true);
+								}
 										
-								
+										
+					
 							} else {
 								JOptionPane.showMessageDialog(tfCpf, "O CPF deve conter 11 números, sem simbolos ou letras", "Erro de tamanho", JOptionPane.ERROR_MESSAGE);
 								tfCpf.setText("");

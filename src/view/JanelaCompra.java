@@ -63,11 +63,13 @@ public class JanelaCompra extends JPanel {
 		
 		
 		btnDeslogar = new JButton("");
+		btnDeslogar.setBorderPainted(false);
 		btnDeslogar.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-sair-50.png")));
 		btnDeslogar.setBounds(10, 11, 50, 50);
 		add(btnDeslogar);
 		
 		btnCarrinho = new JButton("");
+		btnCarrinho.setBorderPainted(false);
 		btnCarrinho.setBackground(new Color(234, 253, 255));
 		btnCarrinho.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnCarrinho.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-carrinho-de-compras-50 (2).png")));
@@ -83,7 +85,10 @@ public class JanelaCompra extends JPanel {
 		spLista.setViewportView(listProdutos);
 		add(spLista);
 		
-		btnAdicionarAoCarrinho = new JButton("ADICIONAR");
+		btnAdicionarAoCarrinho = new JButton("");
+		btnAdicionarAoCarrinho.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/ADICIONAR_CARRINHO.png")));
+		btnAdicionarAoCarrinho.setSelectedIcon(new ImageIcon(JanelaCompra.class.getResource("/images/ADICIONAR_CARRINHO.png")));
+		btnAdicionarAoCarrinho.setBorderPainted(false);
 		btnAdicionarAoCarrinho.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnAdicionarAoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnAdicionarAoCarrinho.setBounds(607, 232, 203, 79);
@@ -95,7 +100,9 @@ public class JanelaCompra extends JPanel {
 		lblTitulo.setBounds(126, 7, 541, 54);
 		add(lblTitulo);
 		
-		btnNotaFiscal = new JButton("NOTA FISCAL");
+		btnNotaFiscal = new JButton("");
+		btnNotaFiscal.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/PAGAR.png")));
+		btnNotaFiscal.setBorderPainted(false);
 		btnNotaFiscal.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNotaFiscal.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnNotaFiscal.setBounds(607, 334, 203, 79);
@@ -121,4 +128,9 @@ public class JanelaCompra extends JPanel {
 	public Produto getProdutoSelecionado() {
 	    return listProdutos.getSelectedValue();
 	}
+
+	public JList<Produto> getListProdutos() {
+		return listProdutos;
+	}
+	
 }

@@ -59,7 +59,7 @@ public class Carrinho {
 	@Override
 	public String toString() {
 		
-		return getNomeProduto() +" Quantidade: "+ getQuantidade()+" R$ "+String.format("%.2f", getValorProduto()*getQuantidade());
+		return getNomeProduto() +" ------------- Quantidade: "+ getQuantidade()+" ------------ R$ "+String.format("%.2f", getValorProduto()*getQuantidade());
 	}
 	
 }

@@ -49,7 +49,7 @@ public class LoginController {
 						}
 						
 					} else {
-						JOptionPane.showMessageDialog(tfNome, "Digite seu nome!", "Campo Vazio", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(tfNome, "Digite seu nome!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
@@ -81,7 +81,7 @@ public class LoginController {
 					}
 						
 					 else {
-						JOptionPane.showMessageDialog(tfCpf, "Digite seu CPF!", "Campo Vazio", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(tfCpf, "Digite seu CPF!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 				
@@ -93,9 +93,10 @@ public class LoginController {
 			String cpf = view.getCpf();
 
 			if (!nome.trim().isEmpty() && !cpf.trim().isEmpty()) {
-
+				boolean estaCorreto =false;
 				for (Usuario usuario : model.listarUsuarios()) {
 					if (usuario.getNome().equalsIgnoreCase(nome) && usuario.getCpf().equals(cpf)) {
+						estaCorreto =true;
 						if (usuario.getTipoUsuario().equalsIgnoreCase("Administrador")) {
 							navegador.navegarPara("PRODUTOS");
 						} else {
@@ -104,6 +105,9 @@ public class LoginController {
 							navegador.navegarPara("COMPRA");
 						}
 					}
+				}
+				if(!estaCorreto) {
+					JOptionPane.showMessageDialog(view, "Nome e cpf incorretos ou usuário não existente", "Erro ao fazer login", JOptionPane.WARNING_MESSAGE);
 				}
 
 				this.view.limparFormulario();

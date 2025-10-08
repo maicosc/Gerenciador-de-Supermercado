@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -37,7 +38,7 @@ public class JanelaCadastroProduto extends JPanel {
 	private JButton btnAtualizarProduto;
 	private JButton btnDeletarProduto;
 	private JButton btnDeslogar;
-	private JList list;
+	private JList<Produto>list;
 	
 
 	/**
@@ -61,6 +62,7 @@ public class JanelaCadastroProduto extends JPanel {
 		
 		
 		btnDeslogar = new JButton("");
+		btnDeslogar.setBorderPainted(false);
 		btnDeslogar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnDeslogar.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/icons8-sair-50.png")));
 		btnDeslogar.setBounds(10, 11, 50, 50);
@@ -76,33 +78,42 @@ public class JanelaCadastroProduto extends JPanel {
 		tfNomeProduto.setColumns(10);
 		
 		tfPreco = new JTextField();
+		tfPreco.setEnabled(false);
 		tfPreco.setColumns(10);
 		tfPreco.setBounds(95, 182, 112, 37);
 		add(tfPreco);
 		
 		tfQuantidade = new JTextField();
+		tfQuantidade.setEnabled(false);
 		tfQuantidade.setColumns(10);
 		tfQuantidade.setBounds(344, 185, 112, 37);
 		add(tfQuantidade);
 		
 		tfCodProd = new JTextField();
+		tfCodProd.setEnabled(false);
 		tfCodProd.setColumns(10);
 		tfCodProd.setBounds(207, 240, 112, 37);
 		add(tfCodProd);
 		
 		btnAdicionarProduto = new JButton("");
+		btnAdicionarProduto.setBorderPainted(false);
+		btnAdicionarProduto.setEnabled(false);
 		btnAdicionarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/Adicionar.png")));
 		btnAdicionarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
 		btnAdicionarProduto.setBounds(95, 323, 224, 43);
 		add(btnAdicionarProduto);
 		
 		btnAtualizarProduto = new JButton("");
+		btnAtualizarProduto.setBorderPainted(false);
+		btnAtualizarProduto.setEnabled(false);
 		btnAtualizarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/AtualizarProduto.png")));
 		btnAtualizarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
 		btnAtualizarProduto.setBounds(95, 377, 224, 43);
 		add(btnAtualizarProduto);
 		
 		btnDeletarProduto = new JButton("");
+		btnDeletarProduto.setBorderPainted(false);
+		btnDeletarProduto.setEnabled(false);
 		btnDeletarProduto.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnDeletarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/DeletarProduto.png")));
 		btnDeletarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
@@ -136,19 +147,19 @@ public class JanelaCadastroProduto extends JPanel {
 		add(lblTitulo);
 	}
 
-	public String getTfNomeProduto() {
+	public String getNomeProduto() {
 		return tfNomeProduto.getText();
 	}
 
-	public String getTfPreco() {
+	public String getPreco() {
 		return tfPreco.getText();
 	}
 
-	public String getTfQuantidade() {
+	public String getQuantidade() {
 		return tfQuantidade.getText();
 	}
 
-	public String getTfCodProd() {
+	public String getCodProd() {
 		return tfCodProd.getText();
 	}
 	public void cadastrarProduto(ActionListener actionListener) {
@@ -172,6 +183,58 @@ public class JanelaCadastroProduto extends JPanel {
 	public void setListaModeloProduto(DefaultListModel<Produto> modelo) {
 	    list.setModel(modelo);
 	}
-	
+
+	public JTextField getTfNomeProduto() {
+		return tfNomeProduto;
+	}
+
+	public JTextField getTfPreco() {
+		return tfPreco;
+	}
+
+	public JTextField getTfQuantidade() {
+		return tfQuantidade;
+	}
+
+	public JTextField getTfCodProd() {
+		return tfCodProd;
+	}
+
+	public JButton getBtnAdicionarProduto() {
+		return btnAdicionarProduto;
+	}
+
+	public JButton getBtnAtualizarProduto() {
+		return btnAtualizarProduto;
+	}
+
+	public JButton getBtnDeletarProduto() {
+		return btnDeletarProduto;
+	}
+
+	public JList getList() {
+		return list;
+	}
+	public void ativaPreco(KeyListener kLis) {
+		this.tfNomeProduto.addKeyListener(kLis);
+	}
+	public void ativaQuantidade(KeyListener kLis) {
+		this.tfPreco.addKeyListener(kLis);
+	}
+	public void ativaCodigo(KeyListener kLis) {
+		this.tfQuantidade.addKeyListener(kLis);
+	}
+	public void ativaAdicionar(KeyListener kLis) {
+		this.tfCodProd.addKeyListener(kLis);
+	}
+	public Produto getProdutoSelecionado() {
+	    return list.getSelectedValue();
+	}
+	public void preencherFormulario(Produto p) {
+		this.tfNomeProduto.setText(p.getNomeProd());
+		this.tfPreco.setText(String.format("%.2f",p.getPreco()));
+		this.tfQuantidade.setText(String.valueOf(p.getQuantidade()));
+		this.tfCodProd.setText(String.valueOf(p.getCodProd()));
+	}
 	
 }
