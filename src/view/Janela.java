@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class Janela extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -11,6 +12,7 @@ public class Janela extends JFrame {
 	private CardLayout cardLayout;
 
 	public Janela() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Janela.class.getResource("/images/iconFrame.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 820, 568);

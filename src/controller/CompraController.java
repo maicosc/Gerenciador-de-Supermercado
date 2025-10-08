@@ -43,8 +43,12 @@ public class CompraController {
 		String[] opcoes = { "Pagar", "Cancelar" };
 
 		carregarProdutosNaLista();
-
 		this.view.setListaModelo(lstM);
+		
+		this.view.recarregarLista(e -> {
+			carregarProdutosNaLista();
+			this.view.setListaModelo(lstM);
+		});
 
 		lista.addListSelectionListener(e -> {
 			Produto p = (Produto) lista.getSelectedValue();
@@ -69,6 +73,10 @@ public class CompraController {
 			}
 		});
 
+		this.view.deslogar(e -> {
+			lista.clearSelection();
+			navegador.navegarPara("LOGIN");
+		});
 		this.view.abrirCarrinho(e -> {
 			navegador.abrirJanela(view2);
 			carregarProdutosNaListaCarrinho();
@@ -173,25 +181,37 @@ public class CompraController {
 
 		this.view2.deletarProdutoDoCarrinho(e -> {
 			Carrinho selecionado = view2.getProdutoSelecionadoCar();
-			model.excluirProdutoDeCarrinho(selecionado.getId());
-			JOptionPane.showMessageDialog(view2, "Produto excluído do carrinho!", "Carrinho atualizado",
-					JOptionPane.DEFAULT_OPTION);
-			carregarProdutosNaListaCarrinho();
-			this.view2.setListaModeloCarrinho(lstMC);
-			carregarProdutosNaLista();
-			this.view.setListaModelo(lstM);
-			this.view2.setLblValorTotal(
-					"Valor Total: R$ " + String.format("%.2f", model.valorTotalDoCarrinho(navegador.getCpf())));
+			if (selecionado != null) {
+				model.excluirProdutoDeCarrinho(selecionado.getId());
+				JOptionPane.showMessageDialog(view2, "Produto excluído do carrinho!", "Carrinho atualizado",
+						JOptionPane.INFORMATION_MESSAGE);
+				carregarProdutosNaListaCarrinho();
+				this.view2.setListaModeloCarrinho(lstMC);
+				carregarProdutosNaLista();
+				this.view.setListaModelo(lstM);
+				this.view2.setLblValorTotal(
+						"Valor Total: R$ " + String.format("%.2f", model.valorTotalDoCarrinho(navegador.getCpf())));
+			} else {
+				JOptionPane.showMessageDialog(view2, "Selecione um produto na lista!", "Aviso",
+						JOptionPane.WARNING_MESSAGE);
+			}
+			
 		});
 
 		this.view.emitirNotaFiscal(e -> {
-			int confirmacao = JOptionPane.showOptionDialog(view, stringNotaFiscal(), "Nota Fiscal",
-					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
-			if (confirmacao == JOptionPane.YES_OPTION) {
-				JOptionPane.showMessageDialog(view2, "Pagamento concluído", "Pagamento", JOptionPane.DEFAULT_OPTION);
-				stringNotaFiscal();
-				model.excluirTodosProdutosDeCarrinho(navegador.getCpf());
+			if(model.valorTotalDoCarrinho(navegador.getCpf()) != 0.00) {
+				int confirmacao = JOptionPane.showOptionDialog(view, stringNotaFiscal(), "Nota Fiscal",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+				if (confirmacao == JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(view2, "Pagamento concluído", "Pagamento", JOptionPane.DEFAULT_OPTION);
+					stringNotaFiscal();
+					model.excluirTodosProdutosDeCarrinho(navegador.getCpf());
+				}
+			}else {
+				JOptionPane.showMessageDialog(view, "Não há produtos no carrinho", "Aviso",
+						JOptionPane.WARNING_MESSAGE);
 			}
+			
 		});
 
 	}
@@ -201,6 +221,8 @@ public class CompraController {
 		for (Produto p : prodD.listarProdutos()) {
 			lstM.addElement(p);
 		}
+		view.getListProdutos().revalidate();
+		view.getListProdutos().repaint();
 
 	}
 

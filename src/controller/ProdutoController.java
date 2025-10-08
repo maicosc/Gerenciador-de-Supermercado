@@ -11,15 +11,20 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import model.CarrinhoDAO;
 import model.Produto;
 import model.ProdutoDAO;
 import model.Usuario;
 import view.JanelaCadastroProduto;
+import view.*;
 
 public class ProdutoController {
 	private final JanelaCadastroProduto view;
 	private final ProdutoDAO model;
 	private final Navegador navegador;
+	private final JanelaCompra jC;
+	private final JanelaCarrinho jCarr;
+	private final CarrinhoDAO cDAO;
 	private DefaultListModel<Produto> lstM;
 	private boolean estaSelect = false;
 	
@@ -37,6 +42,10 @@ public class ProdutoController {
 		JButton bAtu = this.view.getBtnAtualizarProduto();
 		JButton bDel = this.view.getBtnDeletarProduto();
 		JList lista = this.view.getList();
+		jC = new JanelaCompra();
+		jCarr = new JanelaCarrinho();
+		cDAO = new CarrinhoDAO();
+		String [] opcoes = {"Sim", "Não"};
 		
 		
 		carregarProdutosNaLista();
@@ -72,15 +81,35 @@ public class ProdutoController {
 
 			if (!nomeProduto.trim().isEmpty()&& !quantidade.trim().isEmpty() && !preco.trim().isEmpty() && !codProd.trim().isEmpty()) {
 
-				Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
-						Integer.parseInt(codProd));
-				this.model.adicionarProduto(p);
-				JOptionPane.showMessageDialog(view, "Produto adicionado!", "Produtos atualizados", JOptionPane.DEFAULT_OPTION);
-				this.view.limparFormulario();
-				carregarProdutosNaLista();
-
-				this.view.setListaModeloProduto(lstM);
-
+				boolean existe =false;
+				for (Produto p : model.listarProdutos()) {
+					if (p.getNomeProd().equalsIgnoreCase(nomeProduto)) {
+						existe =true;
+					}
+				}
+				for (Produto p : model.listarProdutos()) {
+					if (p.getCodProd() == Integer.parseInt(codProd)) {
+						existe =true;
+					}
+				}
+				if(existe) {
+					
+					JOptionPane.showMessageDialog(bAdi, "Já existe um produto com este código ou nome", "Produto existente", JOptionPane.WARNING_MESSAGE);
+				}else {
+					Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
+							Integer.parseInt(codProd));
+					this.model.adicionarProduto(p);
+					JOptionPane.showMessageDialog(view, "Produto adicionado!", "Produtos atualizados", JOptionPane.INFORMATION_MESSAGE);
+					this.view.limparFormulario();
+					carregarProdutosNaLista();
+					this.view.setListaModeloProduto(lstM);
+					CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
+					cCon.carregarProdutosNaLista();
+					jC.setListaModelo(lstM);
+				}
+				
+				
+				limparTudo(view, tNomeProd, tPreco, tQuant, tCodProd, bAdi, bAtu, bDel, lista);
 			}
 		});
 		this.view.atualizarProduto(e -> {
@@ -92,21 +121,48 @@ public class ProdutoController {
 
 			if (!nomeProduto.trim().isEmpty() && !quantidade.trim().isEmpty() && !preco.trim().isEmpty()) {
 
-				Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
-						selecionado.getCodProd());
-				this.model.atualizarProduto(p);
-				JOptionPane.showMessageDialog(view, "Produto atualizado!", "Produtos atualizados", JOptionPane.DEFAULT_OPTION);
-				carregarProdutosNaLista();
-				this.view.setListaModeloProduto(lstM);
+				boolean existe =false;
+				for (Produto p : model.listarProdutos()) {
+					if (p.getNomeProd().equalsIgnoreCase(nomeProduto)) {
+						existe =true;
+					}
+				}
+				if(existe) {
+					
+					JOptionPane.showMessageDialog(bAdi, "Já existe um produto com este código ou nome", "Produto existente", JOptionPane.WARNING_MESSAGE);
+				}else {
+					Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
+							selecionado.getCodProd());
+					this.model.atualizarProduto(p);
+					JOptionPane.showMessageDialog(view, "Produto atualizado!", "Produtos atualizados", JOptionPane.INFORMATION_MESSAGE);
+					carregarProdutosNaLista();
+					this.view.setListaModeloProduto(lstM);
+					CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
+					cCon.carregarProdutosNaLista();
+					jC.setListaModelo(lstM);
+				}
+				
+				
 				limparTudo(view, tNomeProd, tPreco, tQuant, tCodProd, bAdi, bAtu, bDel, lista);
 			}
 		});
 		this.view.deletarProduto(e -> {
-			Produto selecionado = this.view.getProdutoSelecionado();
-			model.excluirProduto(selecionado.getCodProd());
-			JOptionPane.showMessageDialog(view, "Produto excluído!", "Produtos atualizados", JOptionPane.DEFAULT_OPTION);
-			carregarProdutosNaLista();
-			this.view.setListaModeloProduto(lstM);
+			
+			int escolha = JOptionPane.showOptionDialog(view, "Deseja excluir este produto?", "Excluir produto",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+			
+			if(escolha == JOptionPane.YES_OPTION) {
+				Produto selecionado = this.view.getProdutoSelecionado();
+				model.excluirProduto(selecionado.getCodProd());
+				JOptionPane.showMessageDialog(view, "Produto excluído!", "Produtos atualizados", JOptionPane.INFORMATION_MESSAGE);
+				carregarProdutosNaLista();
+				this.view.setListaModeloProduto(lstM);
+				CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
+				cCon.carregarProdutosNaLista();
+				jC.setListaModelo(lstM);
+			}
+			
+			
 			limparTudo(view, tNomeProd, tPreco, tQuant, tCodProd, bAdi, bAtu, bDel, lista);
 		});
 		this.view.deslogar(e -> {

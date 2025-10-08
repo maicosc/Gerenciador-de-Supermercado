@@ -28,6 +28,7 @@ public class JanelaCompra extends JPanel {
 	private JButton btnAdicionarAoCarrinho;
 	private JList<Produto> listProdutos;
 	private JButton btnNotaFiscal;
+	private JButton btnRecarregar;
 
 
 
@@ -107,9 +108,19 @@ public class JanelaCompra extends JPanel {
 		btnNotaFiscal.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnNotaFiscal.setBounds(607, 334, 203, 79);
 		add(btnNotaFiscal);
+		
+		btnRecarregar = new JButton("");
+		btnRecarregar.setForeground(new Color(234, 255, 254));
+		btnRecarregar.setBackground(new Color(234, 255, 254));
+		btnRecarregar.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-reinicialização-50 (1).png")));
+		btnRecarregar.setBounds(607, 105, 50, 50);
+		add(btnRecarregar);
 	}
 	public void deslogar(ActionListener actionListener) {
 		this.btnDeslogar.addActionListener(actionListener);
+	}
+	public void recarregarLista(ActionListener actionListener) {
+		this.btnRecarregar.addActionListener(actionListener);
 	}
 	public void abrirCarrinho(ActionListener actionListener) {
 		this.btnCarrinho.addActionListener(actionListener);
@@ -132,5 +143,4 @@ public class JanelaCompra extends JPanel {
 	public JList<Produto> getListProdutos() {
 		return listProdutos;
 	}
-	
 }

@@ -111,11 +111,28 @@ public class CadastroController {
 
 		if (!nome.trim().isEmpty() && !cpf.trim().isEmpty() && !tipoUser.trim().isEmpty()) {
 
-			Usuario u = new Usuario(nome, cpf, tipoUser);
-			this.model.adicionarUsuario(u);
-			JOptionPane.showMessageDialog(view, "Cadastro concluído!", "Cadastro Feito", JOptionPane.DEFAULT_OPTION);
-			this.view.limparFormulario();
-			navegador.navegarPara("LOGIN");
+			boolean existe =false;
+			for (Usuario usuario : model.listarUsuarios()) {
+				if (usuario.getCpf().equals(cpf)) {
+					existe =true;
+				}
+			}
+			for (Usuario usuario : model.listarUsuarios()) {
+				if (usuario.getNome().equalsIgnoreCase(nome)) {
+					existe =true;
+				}
+			}
+			if(existe) {
+				
+				JOptionPane.showMessageDialog(bCadas, "Já existe um usuário com este CPF e/ou nome ", "Usuario existente", JOptionPane.ERROR_MESSAGE);
+			}else {
+				Usuario u = new Usuario(nome, cpf, tipoUser);
+				this.model.adicionarUsuario(u);
+				JOptionPane.showMessageDialog(view, "Cadastro concluído!", "Cadastro Feito", JOptionPane.INFORMATION_MESSAGE);
+				this.view.limparFormulario();
+				navegador.navegarPara("LOGIN");
+			}
+			
 
 		}
 	});
