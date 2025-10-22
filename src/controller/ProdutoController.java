@@ -96,16 +96,23 @@ public class ProdutoController {
 					
 					JOptionPane.showMessageDialog(bAdi, "Já existe um produto com este código ou nome", "Produto existente", JOptionPane.WARNING_MESSAGE);
 				}else {
-					Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
-							Integer.parseInt(codProd));
-					this.model.adicionarProduto(p);
-					JOptionPane.showMessageDialog(view, "Produto adicionado!", "Produtos atualizados", JOptionPane.INFORMATION_MESSAGE);
-					this.view.limparFormulario();
-					carregarProdutosNaLista();
-					this.view.setListaModeloProduto(lstM);
-					CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
-					cCon.carregarProdutosNaLista();
-					jC.setListaModelo(lstM);
+					if(codProd.matches("\\d{5}")) {
+						Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
+								Integer.parseInt(codProd));
+						this.model.adicionarProduto(p);
+						JOptionPane.showMessageDialog(view, "Produto adicionado!", "Produtos atualizados", JOptionPane.INFORMATION_MESSAGE);
+						this.view.limparFormulario();
+						carregarProdutosNaLista();
+						this.view.setListaModeloProduto(lstM);
+						CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
+						cCon.carregarProdutosNaLista();
+						jC.setListaModelo(lstM);
+						
+					} else {
+						JOptionPane.showMessageDialog(tCodProd, "O código deve conter apenas 5 números!", "Erro de estrutura",JOptionPane.WARNING_MESSAGE);
+						tCodProd.setText("");
+					}
+					
 				}
 				
 				
@@ -121,16 +128,7 @@ public class ProdutoController {
 
 			if (!nomeProduto.trim().isEmpty() && !quantidade.trim().isEmpty() && !preco.trim().isEmpty()) {
 
-				boolean existe =false;
-				for (Produto p : model.listarProdutos()) {
-					if (p.getNomeProd().equalsIgnoreCase(nomeProduto)) {
-						existe =true;
-					}
-				}
-				if(existe) {
-					
-					JOptionPane.showMessageDialog(bAdi, "Já existe um produto com este código ou nome", "Produto existente", JOptionPane.WARNING_MESSAGE);
-				}else {
+				
 					Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
 							selecionado.getCodProd());
 					this.model.atualizarProduto(p);
@@ -140,10 +138,12 @@ public class ProdutoController {
 					CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
 					cCon.carregarProdutosNaLista();
 					jC.setListaModelo(lstM);
-				}
+				
 				
 				
 				limparTudo(view, tNomeProd, tPreco, tQuant, tCodProd, bAdi, bAtu, bDel, lista);
+			}else {
+				JOptionPane.showMessageDialog(tNomeProd, "Não deixe campos vazios!", "Campo vazio", JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		this.view.deletarProduto(e -> {

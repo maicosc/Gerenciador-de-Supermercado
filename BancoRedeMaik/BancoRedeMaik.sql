@@ -1,5 +1,5 @@
-CREATE DATABASE redemalik;
-USE redemalik;
+CREATE DATABASE redemaik;
+USE redemaik;
 
 CREATE TABLE Usuarios (
     cpf VARCHAR(14) PRIMARY KEY,
