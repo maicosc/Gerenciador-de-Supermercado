@@ -13,7 +13,7 @@ public class Janela extends JFrame {
 
 	public Janela() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Janela.class.getResource("/images/iconFrame.png")));
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 820, 568);
 		setName("GerenciadorRedeMaik");

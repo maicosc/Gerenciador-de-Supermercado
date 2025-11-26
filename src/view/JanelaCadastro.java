@@ -24,6 +24,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.awt.Component;
 import javax.swing.JRadioButton;
+import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionEvent;
 
 public class JanelaCadastro extends JPanel {
 
@@ -31,12 +33,11 @@ public class JanelaCadastro extends JPanel {
 	private JPanel contentPane;
 	private JTextField tfNome;
 	private JTextField tfCpf;
-	private JButton btnCadastrar;
 	private String tipoUser;
 	private ButtonGroup grupo;
 	private JRadioButton rdbtnCliente, rdbtnAdm;
 	private JLabel lblLogin;
-	
+	private JButton btnCadastrar;
 
 	/**
 	 * Launch the application.
@@ -52,42 +53,76 @@ public class JanelaCadastro extends JPanel {
 		
 		setBackground(new Color(234, 253, 255));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(new MigLayout("", "[90px,grow][90px,grow][90px,grow][90px,grow][100px,grow][90px,grow 90][90px,grow 90][90px,grow 90][90px,grow 90]", "[71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow]"));
 		
-		setLayout(null);
+		JLabel lblIcon = new JLabel("");
+		lblIcon.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/LogoSuperMercado.png")));
+		add(lblIcon, "flowx,cell 0 0,alignx right,aligny center");
 		
-		JLabel lblNomaInc = new JLabel("REDE MAIK");
-		lblNomaInc.setForeground(new Color(255, 0, 0));
-		lblNomaInc.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNomaInc.setBounds(60, 13, 122, 37);
-		add(lblNomaInc);
+		grupo = new ButtonGroup();
 		
-		JLabel lblSlogan = new JLabel("Sempre do seu lado");
-		lblSlogan.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblSlogan.setForeground(new Color(0, 0, 0));
-		lblSlogan.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSlogan.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblSlogan.setBounds(50, 44, 132, 14);
-		add(lblSlogan);
+		
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblNome, "cell 0 2,alignx right,growy");
 		
 		tfNome = new JTextField();
 		tfNome.setName("Nome");
 		tfNome.setToolTipText("Nome");
-		tfNome.setBounds(152, 133, 567, 40);
 		
 			  
-		add(tfNome);
+		add(tfNome, "cell 1 2 6 1,grow");
 		tfNome.setColumns(10);
+		
+		JLabel lblCPF = new JLabel("CPF:");
+		lblCPF.setHorizontalTextPosition(SwingConstants.LEADING);
+		lblCPF.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCPF.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblCPF, "cell 0 3,alignx right,growy");
 		
 		tfCpf = new JTextField();
 		tfCpf.setEnabled(false);
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(152, 182, 567, 40);
 		
-		add(tfCpf);
+		add(tfCpf, "cell 1 3 6 1,grow");
+		
+		JLabel lblNomaInc = new JLabel("REDE MAIK");
+		lblNomaInc.setForeground(new Color(255, 0, 0));
+		lblNomaInc.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblNomaInc, "cell 0 0,alignx left,aligny center");
 		
 		btnCadastrar = new JButton("");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		rdbtnAdm = new JRadioButton("Administrador");
+		rdbtnAdm.setEnabled(false);
+		rdbtnAdm.setBackground(new Color(234, 253, 255));
+		rdbtnAdm.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		add(rdbtnAdm, "flowx,cell 4 4,alignx center,growy");
+		grupo.add(rdbtnAdm);
+		
+		rdbtnCliente = new JRadioButton("Cliente");
+		rdbtnCliente.setEnabled(false);
+		rdbtnCliente.setBackground(new Color(234, 253, 255));
+		rdbtnCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		add(rdbtnCliente, "cell 4 4,alignx right,growy");
+		grupo.add(rdbtnCliente);
+		
+		JLabel lblTextLogin = new JLabel("Voltar para");
+		lblTextLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTextLogin.setHorizontalAlignment(SwingConstants.TRAILING);
+		add(lblTextLogin, "flowx,cell 4 5,alignx center,growy");
+		
+		lblLogin = new JLabel("login!");
+		lblLogin.setForeground(new Color(0, 128, 255));
+		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
+		add(lblLogin, "cell 4 5,alignx left,growy");
 		btnCadastrar.setBorderPainted(false);
 		btnCadastrar.setIcon(new ImageIcon(JanelaCadastro.class.getResource("/images/Cadastrar.png")));
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -96,61 +131,14 @@ public class JanelaCadastro extends JPanel {
 		btnCadastrar.setBackground(new Color(255, 0, 0));
 		btnCadastrar.setBounds(289, 324, 264, 50);
 		
-		add(btnCadastrar);
+		add(btnCadastrar, "cell 4 6");
 		
 		JLabel lblEmpresa = new JLabel("Maker by Cybernooste Technologies Solutions");
 		lblEmpresa.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblEmpresa.setBounds(226, 471, 389, 37);
-		add(lblEmpresa);
-		
-		JLabel lblIcon = new JLabel("New label");
-		lblIcon.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/LogoSuperMercado.png")));
-		lblIcon.setBounds(10, 11, 40, 40);
-		add(lblIcon);
-		
-		rdbtnAdm = new JRadioButton("Administrador");
-		rdbtnAdm.setEnabled(false);
-		rdbtnAdm.setBackground(new Color(234, 253, 255));
-		rdbtnAdm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rdbtnAdm.setBounds(289, 256, 141, 37);
-		add(rdbtnAdm);
-		
-		rdbtnCliente = new JRadioButton("Cliente");
-		rdbtnCliente.setEnabled(false);
-		rdbtnCliente.setBackground(new Color(234, 253, 255));
-		rdbtnCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rdbtnCliente.setBounds(453, 256, 141, 37);
-		add(rdbtnCliente);
-		
-		grupo = new ButtonGroup();
-		grupo.add(rdbtnCliente);
-		grupo.add(rdbtnAdm);
-		
-		
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNome.setBounds(77, 136, 74, 37);
-		add(lblNome);
-		
-		JLabel lblCPF = new JLabel("CPF:");
-		lblCPF.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblCPF.setBounds(92, 185, 61, 37);
-		add(lblCPF);
-		
-		JLabel lblTextLogin = new JLabel("Voltar para");
-		lblTextLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTextLogin.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTextLogin.setBounds(307, 388, 133, 23);
-		add(lblTextLogin);
-		
-		lblLogin = new JLabel("login!");
-		lblLogin.setForeground(new Color(0, 128, 255));
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblLogin.setBounds(443, 388, 80, 23);
-		add(lblLogin);
+		add(lblEmpresa, "cell 4 8,growx,aligny center");
 	}
 	public void cadastrar(ActionListener actionListener) {
 		this.btnCadastrar.addActionListener(actionListener);
