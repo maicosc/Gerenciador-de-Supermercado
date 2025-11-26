@@ -15,6 +15,7 @@ import view.JanelaCarrinho;
 import view.JanelaCompra;
 import view.JanelaLogin;
 import controller.LoginController;
+import excecoespersonalizadas.*;
 
 public class CompraController {
 	private final JanelaCompra view;
@@ -88,43 +89,38 @@ public class CompraController {
 		this.view2.atualizarProdutoEmCarrinho(e -> {
 
 			Carrinho selecionado = view2.getProdutoSelecionadoCar();
-
-			if (selecionado != null) {
+			
+			try {
+				if (selecionado == null) {
+					throw new ExcecaoR("Selecione um produto na lista!");
+				}
 				String quantidade = JOptionPane.showInputDialog(view2, "Informe a nova quantidade:", "Quantidade",
 						JOptionPane.QUESTION_MESSAGE);
-
-				if (quantidade != null && !quantidade.trim().isEmpty()) {
-
-					if (quantidade.matches("\\d+")) {
-						int q = Integer.parseInt(quantidade.trim());
-						if (q > selecionado.getQuantidade()) {
-
-							JOptionPane.showMessageDialog(view2, "Quantidade selecionada excede a disponível!", "erro",
-									JOptionPane.WARNING_MESSAGE);
-						} else {
-
-							int qVolta = selecionado.getQuantidade() - q;
-							Produto p = prodD.getProduto(selecionado.getCodProd());
-							prodD.atualizarQuantidadeProd(selecionado.getCodProd(), p.getQuantidade() + qVolta);
-							model.atualizarProdutoEmCarrinho(q, selecionado.getId());
-							JOptionPane.showMessageDialog(view2, "Produto atualizado!", "Carrinho atualizado",
-									JOptionPane.INFORMATION_MESSAGE);
-							carregarProdutosNaListaCarrinho();
-							this.view2.setListaModeloCarrinho(lstMC);
-							carregarProdutosNaLista();
-							this.view.setListaModelo(lstM);
-							this.view2.setLblValorTotal("Valor Total: R$ "
-									+ String.format("%.2f", model.valorTotalDoCarrinho(navegador.getCpf())));
-
-						}
-					} else {
-						JOptionPane.showMessageDialog(view2, "Este campo aceita somente números inteiros positivos!",
-								"Aviso", JOptionPane.WARNING_MESSAGE);
-					}
-
+				if (quantidade == null || !!quantidade.trim().isEmpty()) {
+					throw new ExcecaoR("A nova quantidade não pode ficar vazia!");
 				}
-			} else {
-				JOptionPane.showMessageDialog(view2, "Selecione um produto na lista!", "Aviso",
+				if (!quantidade.matches("\\d+")) {
+					throw new ExcecaoR("Este campo aceita somente números inteiros positivos!");
+				}
+				int q = Integer.parseInt(quantidade.trim());
+				if (q > selecionado.getQuantidade()) {
+					throw new ExcecaoR("Quantidade selecionada excede a disponível!");
+				}
+				int qVolta = selecionado.getQuantidade() - q;
+				Produto p = prodD.getProduto(selecionado.getCodProd());
+				prodD.atualizarQuantidadeProd(selecionado.getCodProd(), p.getQuantidade() + qVolta);
+				model.atualizarProdutoEmCarrinho(q, selecionado.getId());
+				JOptionPane.showMessageDialog(view2, "Produto atualizado!", "Carrinho atualizado",
+						JOptionPane.INFORMATION_MESSAGE);
+				carregarProdutosNaListaCarrinho();
+				this.view2.setListaModeloCarrinho(lstMC);
+				carregarProdutosNaLista();
+				this.view.setListaModelo(lstM);
+				this.view2.setLblValorTotal("Valor Total: R$ "
+						+ String.format("%.2f", model.valorTotalDoCarrinho(navegador.getCpf())));
+				
+			}catch(ExcecaoR err) {
+				JOptionPane.showMessageDialog(view2, err.getMessage(), "ERROR",
 						JOptionPane.WARNING_MESSAGE);
 			}
 		});
@@ -132,56 +128,53 @@ public class CompraController {
 		this.view.adicionarAoCarrinho(e -> {
 			Produto selecionado = view.getProdutoSelecionado();
 
-			if (selecionado != null) {
+			try {
+				if (selecionado == null) {
+					throw new ExcecaoR("Selecione um produto na lista!");
+				}
 				String quantidade = JOptionPane.showInputDialog(view, "Informe a quantidade:", "Quantidade",
 						JOptionPane.QUESTION_MESSAGE);
-
-				if (quantidade != null && !quantidade.trim().isEmpty()) {
-
-					if (quantidade.matches("\\d+")) {
-						int q = Integer.parseInt(quantidade.trim());
-						if (q > selecionado.getQuantidade()) {
-
-							JOptionPane.showMessageDialog(view, "Quantidade selecionada excede a disponível!", "erro",
-									JOptionPane.WARNING_MESSAGE);
-						} else {
-							
-							boolean existe = false;
-							Carrinho c = new Carrinho(selecionado.getPreco(), selecionado.getNomeProd(), q,
-									selecionado.getCodProd(), navegador.getCpf());
-							prodD.atualizarQuantidadeProd(selecionado.getCodProd(), selecionado.getQuantidade() - q);
-							JOptionPane.showMessageDialog(view, "Produto adicionado ao carrinho", "Carrinho atualizado",
-									JOptionPane.INFORMATION_MESSAGE);
-							for (Carrinho carr : model.mostrarCarrinho()) {
-								if(carr.getCodProd() == c.getCodProd()) {
-									
-									model.atualizarProdutoEmCarrinho(carr.getQuantidade() + c.getQuantidade(), carr.getId());
-									existe =true;
-								}
-							}
-							carregarProdutosNaLista();
-							this.view.setListaModelo(lstM);
-							if(!existe) {
-								model.adicionarProdutoAoCarrinho(c);
-							}
-							
-
-						}
-					} else {
-						JOptionPane.showMessageDialog(view2, "Este campo aceita somente números inteiros positivos!",
-								"Aviso", JOptionPane.WARNING_MESSAGE);
-					}
-
+				if (quantidade == null || !!quantidade.trim().isEmpty()) {
+					throw new ExcecaoR("A nova quantidade não pode ficar vazia!");
 				}
-			} else {
-				JOptionPane.showMessageDialog(view, "Selecione um produto na lista!", "Aviso",
+				if (!quantidade.matches("\\d+")) {
+					throw new ExcecaoR("Este campo aceita somente números inteiros positivos!");
+				}
+				int q = Integer.parseInt(quantidade.trim());
+				if (q > selecionado.getQuantidade()) {
+					throw new ExcecaoR("Quantidade selecionada excede a disponível!");
+				}
+				boolean existe = false;
+				Carrinho c = new Carrinho(selecionado.getPreco(), selecionado.getNomeProd(), q,
+						selecionado.getCodProd(), navegador.getCpf());
+				prodD.atualizarQuantidadeProd(selecionado.getCodProd(), selecionado.getQuantidade() - q);
+				JOptionPane.showMessageDialog(view, "Produto adicionado ao carrinho", "Carrinho atualizado",
+						JOptionPane.INFORMATION_MESSAGE);
+				for (Carrinho carr : model.mostrarCarrinho()) {
+					if(carr.getCodProd() == c.getCodProd()) {
+						
+						model.atualizarProdutoEmCarrinho(carr.getQuantidade() + c.getQuantidade(), carr.getId());
+						existe =true;
+					}
+				}
+				carregarProdutosNaLista();
+				this.view.setListaModelo(lstM);
+				if(!existe) {
+					model.adicionarProdutoAoCarrinho(c);
+				}
+			}catch(ExcecaoR err) {
+				JOptionPane.showMessageDialog(view, err.getMessage(), "ERROR",
 						JOptionPane.WARNING_MESSAGE);
 			}
+			
 		});
 
 		this.view2.deletarProdutoDoCarrinho(e -> {
 			Carrinho selecionado = view2.getProdutoSelecionadoCar();
-			if (selecionado != null) {
+			try {
+				if (selecionado == null) {
+					throw new ExcecaoR("Selecione um produto na lista!");
+				}
 				model.excluirProdutoDeCarrinho(selecionado.getId());
 				JOptionPane.showMessageDialog(view2, "Produto excluído do carrinho!", "Carrinho atualizado",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -191,15 +184,19 @@ public class CompraController {
 				this.view.setListaModelo(lstM);
 				this.view2.setLblValorTotal(
 						"Valor Total: R$ " + String.format("%.2f", model.valorTotalDoCarrinho(navegador.getCpf())));
-			} else {
-				JOptionPane.showMessageDialog(view2, "Selecione um produto na lista!", "Aviso",
+			}catch(ExcecaoR err) {
+				JOptionPane.showMessageDialog(view2, err.getMessage(), "Aviso",
 						JOptionPane.WARNING_MESSAGE);
 			}
+			
 			
 		});
 
 		this.view.emitirNotaFiscal(e -> {
-			if(model.valorTotalDoCarrinho(navegador.getCpf()) != 0.00) {
+			try {
+				if(model.valorTotalDoCarrinho(navegador.getCpf()) == 0.00) {
+					throw new ExcecaoR("Não há produtos no carrinho");
+				}
 				int confirmacao = JOptionPane.showOptionDialog(view, stringNotaFiscal(), "Nota Fiscal",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
 				if (confirmacao == JOptionPane.YES_OPTION) {
@@ -207,11 +204,10 @@ public class CompraController {
 					stringNotaFiscal();
 					model.excluirTodosProdutosDeCarrinho(navegador.getCpf());
 				}
-			}else {
-				JOptionPane.showMessageDialog(view, "Não há produtos no carrinho", "Aviso",
+			}catch(ExcecaoR err){
+				JOptionPane.showMessageDialog(view, err.getMessage(), "Aviso",
 						JOptionPane.WARNING_MESSAGE);
-			}
-			
+			}	
 		});
 
 	}

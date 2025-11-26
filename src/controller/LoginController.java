@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import model.Usuario;
 import model.UsuarioDAO;
 import view.JanelaLogin;
+import excecoespersonalizadas.*;
 
 public class LoginController {
 	private final JanelaLogin view;
@@ -35,7 +36,10 @@ public class LoginController {
 				String nome = view.getNome();
 				boolean existe =false;
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!nome.trim().isEmpty()) {
+					try {
+						if (!!nome.trim().isEmpty()) {
+							throw new ExcecaoR("Digite seu nome!");
+						}
 						for (Usuario usuario : model.listarUsuarios()) {
 							if (usuario.getNome().equalsIgnoreCase(nome) ) {
 								tfCpf.setEnabled(true);
@@ -44,13 +48,14 @@ public class LoginController {
 							}
 						}
 						if(!existe) {
-							JOptionPane.showMessageDialog(tfNome, "Não existe um usuário com o nome \""+nome+"\"", "Nome encontrado", JOptionPane.ERROR_MESSAGE);
 							tfNome.setText("");
+							throw new ExcecaoR("Não existe um usuário com o nome \""+nome+"\"");
+							
 						}
-						
-					} else {
-						JOptionPane.showMessageDialog(tfNome, "Digite seu nome!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
+					}catch(ExcecaoR err) {
+						JOptionPane.showMessageDialog(tfNome, err.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
 					}
+					
 				}
 			}
 		});
@@ -60,29 +65,28 @@ public class LoginController {
 				String cpf = view.getCpf();
 				boolean existe =false;
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!cpf.trim().isEmpty()) {
-						
-							if(cpf.matches("\\d{11}")) {
-								for (Usuario usuario : model.listarUsuarios()) {
-									if (usuario.getCpf().equalsIgnoreCase(cpf) ) {
-										btnEntrar.setEnabled(true);
-										existe=true;
-									}
-								}
-								if(!existe) {
-									JOptionPane.showMessageDialog(tfCpf, "Não existe um usuário com o CPF \""+cpf+"\"", "CPF não encontrado", JOptionPane.ERROR_MESSAGE);
-									tfCpf.setText("");
-								}
-							} else {
-								JOptionPane.showMessageDialog(tfCpf, "O CPF deve conter 11 números, sem simbolos ou letras", "Erro de tamanho", JOptionPane.ERROR_MESSAGE);
-								tfCpf.setText("");
+					try {
+						if (!!cpf.trim().isEmpty()) {
+							throw new ExcecaoR("Digite seu CPF!");
+						}
+						if(!cpf.matches("\\d{11}")) {
+							tfCpf.setText("");
+							throw new ExcecaoR("O CPF deve conter 11 números, sem simbolos ou letras");
+						}
+						for (Usuario usuario : model.listarUsuarios()) {
+							if (usuario.getCpf().equalsIgnoreCase(cpf) ) {
+								btnEntrar.setEnabled(true);
+								existe=true;
 							}
-							
+						}
+						if(!existe) {
+							tfCpf.setText("");
+							throw new ExcecaoR("Não existe um usuário com o CPF \""+cpf+"\"");
+						}
+					}catch(ExcecaoR err) {
+						JOptionPane.showMessageDialog(tfCpf, err.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
 					}
-						
-					 else {
-						JOptionPane.showMessageDialog(tfCpf, "Digite seu CPF!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
-					}
+					
 				}
 				
 				}
@@ -91,8 +95,11 @@ public class LoginController {
 		this.view.logar(e -> {
 			String nome = view.getNome();
 			String cpf = view.getCpf();
-
-			if (!nome.trim().isEmpty() && !cpf.trim().isEmpty()) {
+			
+			try {
+				if (!!nome.trim().isEmpty() && !!cpf.trim().isEmpty()) {
+					throw new ExcecaoR("Nenhum campo pode ficar vazio!");
+				}
 				boolean estaCorreto =false;
 				for (Usuario usuario : model.listarUsuarios()) {
 					if (usuario.getNome().equalsIgnoreCase(nome) && usuario.getCpf().equals(cpf)) {
@@ -106,13 +113,20 @@ public class LoginController {
 						}
 					}
 				}
+				this.view.limparFormulario();
 				if(!estaCorreto) {
-					JOptionPane.showMessageDialog(view, "Nome e cpf incorretos ou usuário não existente", "Erro ao fazer login", JOptionPane.WARNING_MESSAGE);
+					throw new ExcecaoR("Nome e/ou cpf incorretos ou usuário não existente");
+					
 				}
 
-				this.view.limparFormulario();
-
+				
+			}catch(ExcecaoR err) {
+				JOptionPane.showMessageDialog(view, err.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
 			}
+
+			
+		
+			
 		});
 		this.view.irParaCadastro(new MouseAdapter() {
 

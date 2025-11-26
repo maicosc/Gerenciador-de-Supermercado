@@ -17,6 +17,7 @@ import model.ProdutoDAO;
 import model.Usuario;
 import view.JanelaCadastroProduto;
 import view.*;
+import excecoespersonalizadas.*;
 
 public class ProdutoController {
 	private final JanelaCadastroProduto view;
@@ -96,7 +97,7 @@ public class ProdutoController {
 					
 					JOptionPane.showMessageDialog(bAdi, "Já existe um produto com este código ou nome", "Produto existente", JOptionPane.WARNING_MESSAGE);
 				}else {
-					if(codProd.matches("\\d{5}")) {
+					try {
 						Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
 								Integer.parseInt(codProd));
 						this.model.adicionarProduto(p);
@@ -107,11 +108,16 @@ public class ProdutoController {
 						CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
 						cCon.carregarProdutosNaLista();
 						jC.setListaModelo(lstM);
+						if(!codProd.matches("\\d{5}")) {
+							
+							throw new ExcecaoR("O código deve conter apenas 5 números!");
+						}
 						
-					} else {
-						JOptionPane.showMessageDialog(tCodProd, "O código deve conter apenas 5 números!", "Erro de estrutura",JOptionPane.WARNING_MESSAGE);
+					}catch(ExcecaoR err) {
+						JOptionPane.showMessageDialog(tCodProd, err.getMessage(), "Erro de estrutura",JOptionPane.WARNING_MESSAGE);
 						tCodProd.setText("");
 					}
+					 
 					
 				}
 				
@@ -125,26 +131,30 @@ public class ProdutoController {
 			String quantidade = view.getQuantidade();
 			String preco = view.getPreco().trim().replace(',', '.');
 			
-
-			if (!nomeProduto.trim().isEmpty() && !quantidade.trim().isEmpty() && !preco.trim().isEmpty()) {
-
+			try {
+				Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
+						selecionado.getCodProd());
+				this.model.atualizarProduto(p);
+				JOptionPane.showMessageDialog(view, "Produto atualizado!", "Produtos atualizados", JOptionPane.INFORMATION_MESSAGE);
+				carregarProdutosNaLista();
+				this.view.setListaModeloProduto(lstM);
+				CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
+				cCon.carregarProdutosNaLista();
+				jC.setListaModelo(lstM);
+			
+			
+			
+			limparTudo(view, tNomeProd, tPreco, tQuant, tCodProd, bAdi, bAtu, bDel, lista);
+				if(!!nomeProduto.trim().isEmpty() && !!quantidade.trim().isEmpty() && !!preco.trim().isEmpty()) {
+					
+					throw new ExcecaoR("Não deixe campos vazios!");
+				}
 				
-					Produto p = new Produto(nomeProduto, Integer.parseInt(quantidade), Double.parseDouble(preco),
-							selecionado.getCodProd());
-					this.model.atualizarProduto(p);
-					JOptionPane.showMessageDialog(view, "Produto atualizado!", "Produtos atualizados", JOptionPane.INFORMATION_MESSAGE);
-					carregarProdutosNaLista();
-					this.view.setListaModeloProduto(lstM);
-					CompraController cCon = new CompraController(jC, jCarr , cDAO , navegador);
-					cCon.carregarProdutosNaLista();
-					jC.setListaModelo(lstM);
-				
-				
-				
-				limparTudo(view, tNomeProd, tPreco, tQuant, tCodProd, bAdi, bAtu, bDel, lista);
-			}else {
-				JOptionPane.showMessageDialog(tNomeProd, "Não deixe campos vazios!", "Campo vazio", JOptionPane.WARNING_MESSAGE);
+			}catch(ExcecaoR err) {
+				JOptionPane.showMessageDialog(tNomeProd, err.getMessage() , "Campo vazio", JOptionPane.WARNING_MESSAGE);
 			}
+
+			
 		});
 		this.view.deletarProduto(e -> {
 			
@@ -176,33 +186,31 @@ public class ProdutoController {
 				String nomeProd = view.getNomeProduto();
 				
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!nomeProd.trim().isEmpty()) {
-						
-							if(nomeProd.matches("[A-Za-zÀ-ÖØ-öø-ÿ ]+")) {
-								boolean existe =false;
-								for (Produto p : model.listarProdutos()) {
-									if (p.getNomeProd().equalsIgnoreCase(nomeProd)) {
-										existe =true;
-									}
-								}
-								if(existe) {
-									
-									JOptionPane.showMessageDialog(tNomeProd, "Já existe um produto com este nome", "Produto existente", JOptionPane.WARNING_MESSAGE);
-								}else {
-									tPreco.setEnabled(true);
-									tPreco.requestFocus();	
-								}
-								
-							} else {
-								JOptionPane.showMessageDialog(tNomeProd, "O nome do produto deve conter apenas letras!", "Erro de estrutura", JOptionPane.WARNING_MESSAGE);
-								tNomeProd.setText("");
-							}
+					try {
+						if (!!nomeProd.trim().isEmpty()) {
+							throw new ExcecaoR("Digite o nome do produto!");
+						}
+						if(!nomeProd.matches("[A-Za-zÀ-ÖØ-öø-ÿ ]+")) {
+							tNomeProd.setText("");
+							throw new ExcecaoR("O nome do produto deve conter apenas letras!");
 							
-					}
+						}
+						boolean existe =false;
+						for (Produto p : model.listarProdutos()) {
+							if (p.getNomeProd().equalsIgnoreCase(nomeProd)) {
+								existe =true;
+							}
+						}
+						if(existe) {
+							throw new ExcecaoR("Já existe um produto com este nome");
+						}
+						tPreco.setEnabled(true);
+						tPreco.requestFocus();	
 						
-					 else {
-						JOptionPane.showMessageDialog(tNomeProd, "Digite o nome do produto!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
+					}catch(ExcecaoR err) {
+						JOptionPane.showMessageDialog(tNomeProd,err.getMessage() , "ERROR", JOptionPane.WARNING_MESSAGE);
 					}
+					
 				}
 				
 				}
@@ -213,21 +221,23 @@ public class ProdutoController {
 				String preco = view.getPreco();
 				
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!preco.trim().isEmpty()) {
+					
+					try {
+						if (!!preco.trim().isEmpty()) {
+							throw new ExcecaoR("Digite o preço do produto!");
+						}
+						if(!preco.matches("\\d+([.,]\\d{1,2})?")) {
+							tPreco.setText("");
+							throw new ExcecaoR("O preco deve conter apenas números com duas casas decimais!");
+						}
+						tQuant.setEnabled(true);
+						tQuant.requestFocus();
 						
-							if(preco.matches("\\d+([.,]\\d{1,2})?")) {
-								tQuant.setEnabled(true);
-								tQuant.requestFocus();
-							} else {
-								JOptionPane.showMessageDialog(tPreco, "O preco deve conter apenas números com duas casas decimais!", "Erro de estrutura", JOptionPane.WARNING_MESSAGE);
-								tPreco.setText("");
-							}
-							
+					}catch(ExcecaoR err) {
+						JOptionPane.showMessageDialog(tPreco, err.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
 					}
-						
-					 else {
-						JOptionPane.showMessageDialog(tPreco, "Digite o preço do produto!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
-					}
+					
+					
 				}
 				
 				}
@@ -238,24 +248,24 @@ public class ProdutoController {
 				String quant = view.getQuantidade();
 				
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!quant.trim().isEmpty()) {
+					
+					try {
+						if (!!quant.trim().isEmpty()) {
+							throw new ExcecaoR("Digite a quantidade!");
+						}
+						if(!quant.matches("\\d+")) {
+							tQuant.setText("");
+							throw new ExcecaoR("A quantidade deve conter apenas números inteiros!");
+						}
+						if(!estaSelect) {
+							tCodProd.setEnabled(true);
+							tCodProd.requestFocus();
+						}
 						
-							if(quant.matches("\\d+")) {
-								if(!estaSelect) {
-									tCodProd.setEnabled(true);
-									tCodProd.requestFocus();
-								}
-								
-							} else {
-								JOptionPane.showMessageDialog(tQuant, "A quantidade deve conter apenas números inteiros!", "Erro de estrutura", JOptionPane.WARNING_MESSAGE);
-								tQuant.setText("");
-							}
-							
+					}catch(ExcecaoR err) {
+						JOptionPane.showMessageDialog(tQuant, err.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
 					}
-						
-					 else {
-						JOptionPane.showMessageDialog(tQuant, "Digite a quantidade!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
-					}
+					
 				}
 				
 				}
@@ -266,32 +276,29 @@ public class ProdutoController {
 				String codProd = view.getCodProd();
 				
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (!codProd.trim().isEmpty()) {
-						
-							if(codProd.matches("\\d{5}")) {
-								boolean existe =false;
-								for (Produto p : model.listarProdutos()) {
-									if (p.getCodProd() == Integer.parseInt(codProd)) {
-										existe =true;
-									}
-								}
-								if(existe) {
-									
-									JOptionPane.showMessageDialog(tCodProd, "Já existe um produto com este código", "Produto existente", JOptionPane.WARNING_MESSAGE);
-								}else {
-									bAdi.setEnabled(true);	
-								}
-								
-							} else {
-								JOptionPane.showMessageDialog(tCodProd, "O código deve conter apenas 5 números!", "Erro de estrutura",JOptionPane.WARNING_MESSAGE);
-								tCodProd.setText("");
+					try {
+						if (!!codProd.trim().isEmpty()) {
+							throw new ExcecaoR("Digite o código do produto!");
+						}
+						if(!codProd.matches("\\d{5}")) {
+							tCodProd.setText("");
+							throw new ExcecaoR("O código deve conter apenas 5 números!");
+						}
+						boolean existe =false;
+						for (Produto p : model.listarProdutos()) {
+							if (p.getCodProd() == Integer.parseInt(codProd)) {
+								existe =true;
 							}
-							
-					}
+						}
+						if(existe) {
+							throw new ExcecaoR("Já existe um produto com este código");
+						}
+						bAdi.setEnabled(true);
 						
-					 else {
-						JOptionPane.showMessageDialog(tCodProd, "Digite o código do produto!", "Campo Vazio", JOptionPane.WARNING_MESSAGE);
+					}catch(ExcecaoR err) {
+						JOptionPane.showMessageDialog(tCodProd,err.getMessage() , "ERROR",JOptionPane.WARNING_MESSAGE);
 					}
+					
 				}
 				
 				}
