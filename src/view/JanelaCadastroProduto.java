@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import net.miginfocom.swing.MigLayout;
 
 public class JanelaCadastroProduto extends JPanel {
 
@@ -55,96 +56,92 @@ public class JanelaCadastroProduto extends JPanel {
 		setBounds(100, 100, 820, 568);
 		
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		
-		setLayout(null);
+		setLayout(new MigLayout("", "[82px,grow][][1px,grow][114px,grow][112px,grow][25px,grow][138px,grow][grow][290px,grow]", "[50px,grow][50px,grow][40px,grow][28px,grow][43px,grow][grow][18px,grow][][][37px,grow][46px,grow][43px,grow][11px,grow][43px,grow][11px,grow][72px,grow]"));
 		
 		
 		
 		btnDeslogar = new JButton("");
+		btnDeslogar.setBackground(new Color(234, 253, 255));
 		btnDeslogar.setBorderPainted(false);
 		btnDeslogar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnDeslogar.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/icons8-sair-50.png")));
-		btnDeslogar.setBounds(10, 11, 50, 50);
-		add(btnDeslogar);
+		add(btnDeslogar, "cell 0 0,alignx left,growy");
+		
+		JLabel lblTitulo = new JLabel("Cadastro de Produto");
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		add(lblTitulo, "cell 1 0,growx,aligny top");
 		
 		list = new JList();
-		list.setBounds(491, 39, 290, 464);
-		add(list);
+		add(list, "cell 3 1 6 14,grow");
 		
 		tfNomeProduto = new JTextField();
-		tfNomeProduto.setBounds(181, 114, 264, 37);
-		add(tfNomeProduto);
+		add(tfNomeProduto, "cell 1 2,grow");
 		tfNomeProduto.setColumns(10);
 		
-		tfPreco = new JTextField();
-		tfPreco.setEnabled(false);
-		tfPreco.setColumns(10);
-		tfPreco.setBounds(95, 182, 112, 37);
-		add(tfPreco);
+		JLabel lblQuantidade = new JLabel("Quantidade:");
+		lblQuantidade.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblQuantidade, "flowx,cell 1 4,alignx right,growy");
 		
-		tfQuantidade = new JTextField();
-		tfQuantidade.setEnabled(false);
-		tfQuantidade.setColumns(10);
-		tfQuantidade.setBounds(344, 185, 112, 37);
-		add(tfQuantidade);
+		JLabel lblCodProd = new JLabel("Código do Produto:");
+		lblCodProd.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblCodProd, "cell 0 5 1 3,alignx center,growy");
 		
 		tfCodProd = new JTextField();
 		tfCodProd.setEnabled(false);
 		tfCodProd.setColumns(10);
-		tfCodProd.setBounds(207, 240, 112, 37);
-		add(tfCodProd);
+		add(tfCodProd, "cell 1 5 1 3,grow");
 		
 		btnAdicionarProduto = new JButton("");
+		btnAdicionarProduto.setBackground(new Color(234, 253, 255));
 		btnAdicionarProduto.setBorderPainted(false);
 		btnAdicionarProduto.setEnabled(false);
 		btnAdicionarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/Adicionar.png")));
 		btnAdicionarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnAdicionarProduto.setBounds(95, 323, 224, 43);
-		add(btnAdicionarProduto);
+		add(btnAdicionarProduto, "cell 1 9,grow");
+		
+		JLabel lblNomeProduto = new JLabel("Nome do Produto:");
+		lblNomeProduto.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblNomeProduto, "cell 0 2,alignx right,growy");
+		
+		JLabel lblPreco = new JLabel("Preço:");
+		lblPreco.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblPreco, "flowx,cell 0 4,alignx right,growy");
 		
 		btnAtualizarProduto = new JButton("");
+		btnAtualizarProduto.setBackground(new Color(234, 253, 255));
+		btnAtualizarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnAtualizarProduto.setBorderPainted(false);
 		btnAtualizarProduto.setEnabled(false);
 		btnAtualizarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/AtualizarProduto.png")));
 		btnAtualizarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnAtualizarProduto.setBounds(95, 377, 224, 43);
-		add(btnAtualizarProduto);
+		add(btnAtualizarProduto, "cell 1 10,grow");
+		
+		tfPreco = new JTextField();
+		tfPreco.setEnabled(false);
+		tfPreco.setColumns(10);
+		add(tfPreco, "cell 0 4,grow");
 		
 		btnDeletarProduto = new JButton("");
+		btnDeletarProduto.setBackground(new Color(234, 253, 255));
+		btnDeletarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnDeletarProduto.setBorderPainted(false);
 		btnDeletarProduto.setEnabled(false);
 		btnDeletarProduto.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnDeletarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/DeletarProduto.png")));
 		btnDeletarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
-		btnDeletarProduto.setBounds(95, 431, 224, 43);
-		add(btnDeletarProduto);
+		add(btnDeletarProduto, "cell 1 11,growx,aligny top");
 		
-		JLabel lblNomeProduto = new JLabel("Nome do Produto:");
-		lblNomeProduto.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNomeProduto.setBounds(10, 111, 174, 36);
-		add(lblNomeProduto);
-		
-		JLabel lblPreco = new JLabel("Preço:");
-		lblPreco.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPreco.setBounds(21, 179, 71, 37);
-		add(lblPreco);
-		
-		JLabel lblQuantidade = new JLabel("Quantidade:");
-		lblQuantidade.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblQuantidade.setBounds(221, 182, 125, 37);
-		add(lblQuantidade);
-		
-		JLabel lblCodProd = new JLabel("Código do Produto:");
-		lblCodProd.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblCodProd.setBounds(21, 240, 186, 37);
-		add(lblCodProd);
-		
-		JLabel lblTitulo = new JLabel("Cadastro de Produto");
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(93, 11, 389, 37);
-		add(lblTitulo);
+		tfQuantidade = new JTextField();
+		tfQuantidade.setEnabled(false);
+		tfQuantidade.setColumns(10);
+		add(tfQuantidade, "cell 1 4,grow");
 	}
 
 	public String getNomeProduto() {

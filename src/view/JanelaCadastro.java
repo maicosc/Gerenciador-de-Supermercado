@@ -53,11 +53,11 @@ public class JanelaCadastro extends JPanel {
 		
 		setBackground(new Color(234, 253, 255));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(new MigLayout("", "[90px,grow][90px,grow][90px,grow][90px,grow][100px,grow][90px,grow 90][90px,grow 90][90px,grow 90][90px,grow 90]", "[71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow]"));
+		setLayout(new MigLayout("", "[90px,grow][90px,grow][90px,grow][90px,grow][][100px,grow][][][90px,grow 90][90px,grow 90][90px,grow 90][90px,grow 90]", "[71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow]"));
 		
 		JLabel lblIcon = new JLabel("");
 		lblIcon.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/LogoSuperMercado.png")));
-		add(lblIcon, "flowx,cell 0 0,alignx right,aligny center");
+		add(lblIcon, "flowy,cell 0 0,alignx center,aligny center");
 		
 		grupo = new ButtonGroup();
 		
@@ -72,7 +72,7 @@ public class JanelaCadastro extends JPanel {
 		tfNome.setToolTipText("Nome");
 		
 			  
-		add(tfNome, "cell 1 2 6 1,grow");
+		add(tfNome, "cell 1 2 10 1,grow");
 		tfNome.setColumns(10);
 		
 		JLabel lblCPF = new JLabel("CPF:");
@@ -87,12 +87,7 @@ public class JanelaCadastro extends JPanel {
 		tfCpf.setDragEnabled(true);
 		tfCpf.setColumns(10);
 		
-		add(tfCpf, "cell 1 3 6 1,grow");
-		
-		JLabel lblNomaInc = new JLabel("REDE MAIK");
-		lblNomaInc.setForeground(new Color(255, 0, 0));
-		lblNomaInc.setFont(new Font("Tahoma", Font.BOLD, 18));
-		add(lblNomaInc, "cell 0 0,alignx left,aligny center");
+		add(tfCpf, "cell 1 3 10 1,grow");
 		
 		btnCadastrar = new JButton("");
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -104,41 +99,46 @@ public class JanelaCadastro extends JPanel {
 		rdbtnAdm.setEnabled(false);
 		rdbtnAdm.setBackground(new Color(234, 253, 255));
 		rdbtnAdm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(rdbtnAdm, "flowx,cell 4 4,alignx center,growy");
+		add(rdbtnAdm, "flowx,cell 5 4,alignx center,growy");
 		grupo.add(rdbtnAdm);
 		
 		rdbtnCliente = new JRadioButton("Cliente");
 		rdbtnCliente.setEnabled(false);
 		rdbtnCliente.setBackground(new Color(234, 253, 255));
 		rdbtnCliente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		add(rdbtnCliente, "cell 4 4,alignx right,growy");
+		add(rdbtnCliente, "cell 5 4,alignx right,growy");
 		grupo.add(rdbtnCliente);
 		
 		JLabel lblTextLogin = new JLabel("Voltar para");
 		lblTextLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTextLogin.setHorizontalAlignment(SwingConstants.TRAILING);
-		add(lblTextLogin, "flowx,cell 4 5,alignx center,growy");
+		add(lblTextLogin, "flowx,cell 5 5,alignx center,aligny center");
 		
 		lblLogin = new JLabel("login!");
 		lblLogin.setForeground(new Color(0, 128, 255));
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
-		add(lblLogin, "cell 4 5,alignx left,growy");
+		add(lblLogin, "cell 5 5,alignx center,aligny center");
 		btnCadastrar.setBorderPainted(false);
 		btnCadastrar.setIcon(new ImageIcon(JanelaCadastro.class.getResource("/images/Cadastrar.png")));
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnCadastrar.setEnabled(false);
 		btnCadastrar.setForeground(new Color(255, 255, 255));
-		btnCadastrar.setBackground(new Color(255, 0, 0));
+		btnCadastrar.setBackground(new Color(234, 253, 255));
 		btnCadastrar.setBounds(289, 324, 264, 50);
 		
-		add(btnCadastrar, "cell 4 6");
+		add(btnCadastrar, "cell 5 6,growx,aligny center");
 		
 		JLabel lblEmpresa = new JLabel("Maker by Cybernooste Technologies Solutions");
 		lblEmpresa.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblEmpresa.setBounds(226, 471, 389, 37);
-		add(lblEmpresa, "cell 4 8,growx,aligny center");
+		add(lblEmpresa, "cell 5 8,growx,aligny center");
+		
+		JLabel lblNomaInc = new JLabel("REDE MAIK");
+		lblNomaInc.setForeground(new Color(255, 0, 0));
+		lblNomaInc.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblNomaInc, "cell 0 0,alignx left,aligny center");
 	}
 	public void cadastrar(ActionListener actionListener) {
 		this.btnCadastrar.addActionListener(actionListener);

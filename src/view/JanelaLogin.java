@@ -26,6 +26,8 @@ import javax.swing.ImageIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionEvent;
 
 public class JanelaLogin extends JPanel {
 
@@ -51,21 +53,11 @@ public class JanelaLogin extends JPanel {
 	
 		setBackground(new Color(234, 253, 255));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(null);
-
+		setLayout(new MigLayout("", "[90px,grow][90px,grow][90px,grow][90px,grow][100px,grow][90px,grow][90px,grow][90px,grow][90px,grow]", "[71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow][71px,grow]"));
 		
-		
-		JLabel lblMercado = new JLabel("REDE MAIK");
-		lblMercado.setForeground(new Color(255, 0, 0));
-		lblMercado.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblMercado.setBounds(77, 11, 104, 22);
-		add(lblMercado);
-		
-		JLabel lblSlogan = new JLabel("Sempre do seu lado");
-		lblSlogan.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSlogan.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblSlogan.setBounds(77, 37, 123, 14);
-		add(lblSlogan);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/LogoSuperMercado.png")));
+		add(lblNewLabel, "flowy,cell 0 0 1 5,alignx center,aligny top");
 		
 		tfNome = new JTextField();
 		tfNome.addKeyListener(new KeyAdapter() {
@@ -73,65 +65,57 @@ public class JanelaLogin extends JPanel {
 			public void keyPressed(KeyEvent e) {
 			}
 		});
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblNome, "cell 1 3,alignx right,aligny center");
 		tfNome.setName("");
 		tfNome.setToolTipText("Nome");
-		tfNome.setBounds(179, 159, 487, 37);
-		add(tfNome);
+		add(tfNome, "cell 2 3 6 1,grow");
 		tfNome.setColumns(10);
+		
+		btnEntrar = new JButton("");
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JLabel lblCpf = new JLabel("CPF:");
+		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblCpf, "cell 1 4,alignx right,aligny center");
 		
 		tfCpf = new JTextField();
 		tfCpf.setEnabled(false);
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(179, 248, 487, 37);
 		
-		add(tfCpf);
+		add(tfCpf, "cell 2 4 6 1,grow");
 		
-		btnEntrar = new JButton("");
+		JLabel lblTextCadastro = new JLabel("Não possui cadastro?");
+		lblTextCadastro.setFont(new Font("Tahoma", Font.BOLD, 15));
+		add(lblTextCadastro, "flowx,cell 4 5,alignx center,aligny center");
 		btnEntrar.setBorderPainted(false);
 		btnEntrar.setEnabled(false);
 		btnEntrar.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/Entrar.png")));
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 24));
 		btnEntrar.setForeground(new Color(255, 255, 255));
-		btnEntrar.setBackground(new Color(255, 0, 0));
-		btnEntrar.setBounds(277, 338, 264, 50);
+		btnEntrar.setBackground(new Color(234, 253, 255));
 		
-		add(btnEntrar);
-		
-		JLabel lblTextCadastro = new JLabel("Não possui cadastro?");
-		lblTextCadastro.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblTextCadastro.setBounds(287, 400, 165, 14);
-		add(lblTextCadastro);
+		add(btnEntrar, "cell 4 6,grow");
 		
 		lblCadastro = new JLabel("Cadastrar");
 		lblCadastro.setBackground(new Color(0, 128, 255));
 		lblCadastro.setForeground(new Color(0, 128, 255));
 		lblCadastro.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblCadastro.setBounds(458, 399, 83, 16);
-		add(lblCadastro);
+		add(lblCadastro, "cell 4 5,alignx center,aligny center");
 		
-		JLabel lblEmpresa = new JLabel("Maker by Cybernooste Technologies Solutions");
-		lblEmpresa.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		lblEmpresa.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmpresa.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblEmpresa.setBounds(270, 511, 271, 11);
-		add(lblEmpresa);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(JanelaLogin.class.getResource("/images/LogoSuperMercado.png")));
-		lblNewLabel.setBounds(27, 11, 56, 40);
-		add(lblNewLabel);
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNome.setBounds(108, 163, 60, 22);
-		add(lblNome);
-		
-		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblCpf.setBounds(128, 252, 41, 22);
-		add(lblCpf);
+				
+				
+				JLabel lblMercado = new JLabel("REDE MAIK");
+				lblMercado.setForeground(new Color(255, 0, 0));
+				lblMercado.setFont(new Font("Tahoma", Font.BOLD, 18));
+				add(lblMercado, "cell 0 0,alignx left,aligny top");
 	}
 	public void logar(ActionListener actionListener) {
 		this.btnEntrar.addActionListener(actionListener);

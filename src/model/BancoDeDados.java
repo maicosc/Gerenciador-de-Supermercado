@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class BancoDeDados {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/redemaik"; 
+    private static final String URL = "jdbc:mysql://localhost:3306/redemalik"; 
     private static final String USUARIO = "root";
     private static final String SENHA = "admin";   
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";

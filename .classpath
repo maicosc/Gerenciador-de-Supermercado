@@ -6,12 +6,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/aluno/Downloads/supermercado/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aluno/Downloads/supermercado/MigLayout/miglayout-swing-11.4.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aluno/Downloads/supermercado/MigLayout/miglayout-swing-11.4.2-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aluno/Downloads/supermercado/MigLayout/miglayout-swing-11.4.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aluno/Downloads/supermercado/MigLayout/miglayout-core-11.4.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aluno/Downloads/supermercado/MigLayout/miglayout-core-11.4.2-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aluno/Downloads/supermercado/MigLayout/miglayout-core-11.4.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/m0386/Arquivos GitHub/Gerenciador-de-Supermercado/MigLayout/miglayout-core-11.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/m0386/Arquivos GitHub/Gerenciador-de-Supermercado/MigLayout/miglayout-core-11.4.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/m0386/Arquivos GitHub/Gerenciador-de-Supermercado/MigLayout/miglayout-core-11.4.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/m0386/Arquivos GitHub/Gerenciador-de-Supermercado/MigLayout/miglayout-swing-11.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/m0386/Arquivos GitHub/Gerenciador-de-Supermercado/MigLayout/miglayout-swing-11.4.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/m0386/Arquivos GitHub/Gerenciador-de-Supermercado/MigLayout/miglayout-swing-11.4.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/m0386/Arquivos GitHub/Gerenciador-de-Supermercado/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

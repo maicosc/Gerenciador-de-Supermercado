@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import model.Produto;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import net.miginfocom.swing.MigLayout;
 
 public class JanelaCompra extends JPanel {
 
@@ -57,64 +58,59 @@ public class JanelaCompra extends JPanel {
 		setBounds(100, 100, 820, 568);
 		
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		
-		setLayout(null);
+		setLayout(new MigLayout("", "[50px,grow][66px,grow][471px,grow][10px,grow][60px,grow][80px,grow][63px,grow]", "[54px,grow][61px,grow][77px,grow][79px,grow][23px,grow][186px,grow]"));
 		
 		
 		
 		btnDeslogar = new JButton("");
+		btnDeslogar.setBackground(new Color(234, 253, 255));
 		btnDeslogar.setBorderPainted(false);
 		btnDeslogar.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-sair-50.png")));
-		btnDeslogar.setBounds(10, 11, 50, 50);
-		add(btnDeslogar);
+		add(btnDeslogar, "cell 0 0,grow");
 		
 		btnCarrinho = new JButton("");
 		btnCarrinho.setBorderPainted(false);
 		btnCarrinho.setBackground(new Color(234, 253, 255));
 		btnCarrinho.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnCarrinho.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-carrinho-de-compras-50 (2).png")));
-		btnCarrinho.setBounds(747, 11, 50, 50);
-		add(btnCarrinho);
+		add(btnCarrinho, "cell 6 0,grow");
 		
 		listProdutos = new JList<Produto>();
 		listProdutos.setBounds(43, 94, 554, 426);
 	
 		
 		JScrollPane spLista = new JScrollPane();
-		spLista.setBounds(43, 94, 554, 426);
 		spLista.setViewportView(listProdutos);
-		add(spLista);
+		add(spLista, "cell 0 1 3 5,grow");
+		
+		btnRecarregar = new JButton("");
+		btnRecarregar.setBorderPainted(false);
+		btnRecarregar.setForeground(new Color(234, 253, 255));
+		btnRecarregar.setBackground(new Color(234, 253, 255));
+		btnRecarregar.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-reinicialização-50 (1).png")));
+		add(btnRecarregar, "cell 4 1,grow");
 		
 		btnAdicionarAoCarrinho = new JButton("");
+		btnAdicionarAoCarrinho.setBackground(new Color(234, 253, 255));
 		btnAdicionarAoCarrinho.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/ADICIONAR_CARRINHO.png")));
 		btnAdicionarAoCarrinho.setSelectedIcon(new ImageIcon(JanelaCompra.class.getResource("/images/ADICIONAR_CARRINHO.png")));
 		btnAdicionarAoCarrinho.setBorderPainted(false);
 		btnAdicionarAoCarrinho.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnAdicionarAoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 24));
-		btnAdicionarAoCarrinho.setBounds(607, 232, 203, 79);
-		add(btnAdicionarAoCarrinho);
+		add(btnAdicionarAoCarrinho, "cell 4 3 3 1,grow");
 		
 		JLabel lblTitulo = new JLabel("Compra de Produtos");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 27));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(126, 7, 541, 54);
-		add(lblTitulo);
+		add(lblTitulo, "cell 2 0 3 1,grow");
 		
 		btnNotaFiscal = new JButton("");
+		btnNotaFiscal.setBackground(new Color(234, 253, 255));
 		btnNotaFiscal.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/PAGAR.png")));
 		btnNotaFiscal.setBorderPainted(false);
 		btnNotaFiscal.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNotaFiscal.setFont(new Font("Tahoma", Font.BOLD, 24));
-		btnNotaFiscal.setBounds(607, 334, 203, 79);
-		add(btnNotaFiscal);
-		
-		btnRecarregar = new JButton("");
-		btnRecarregar.setForeground(new Color(234, 255, 254));
-		btnRecarregar.setBackground(new Color(234, 255, 254));
-		btnRecarregar.setIcon(new ImageIcon(JanelaCompra.class.getResource("/images/icons8-reinicialização-50 (1).png")));
-		btnRecarregar.setBounds(607, 105, 50, 50);
-		add(btnRecarregar);
+		add(btnNotaFiscal, "cell 4 5 3 1,growx,aligny top");
 	}
 	public void deslogar(ActionListener actionListener) {
 		this.btnDeslogar.addActionListener(actionListener);

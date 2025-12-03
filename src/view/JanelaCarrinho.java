@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import net.miginfocom.swing.MigLayout;
 
 public class JanelaCarrinho extends JFrame {
 
@@ -45,31 +46,29 @@ public class JanelaCarrinho extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new MigLayout("", "[154px,grow][119px,grow][154px,grow]", "[29px,grow][224px,grow][42px,grow]"));
 
 		listProdutos = new JList();
-		listProdutos.setBounds(36, 46, 427, 224);
-		contentPane.add(listProdutos);
+		contentPane.add(listProdutos, "cell 0 1 3 1,grow");
 
 		btnAtualizar = new JButton("");
+		btnAtualizar.setBackground(new Color(234, 253, 255));
 		btnAtualizar.setBorderPainted(false);
 		btnAtualizar.setIcon(new ImageIcon(JanelaCarrinho.class.getResource("/images/AtualizarCarrinho.png")));
 		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnAtualizar.setBounds(36, 281, 154, 42);
-		contentPane.add(btnAtualizar);
+		contentPane.add(btnAtualizar, "cell 0 2,grow");
 
 		btnDeletar = new JButton("");
+		btnDeletar.setBackground(new Color(234, 253, 255));
 		btnDeletar.setBorderPainted(false);
 		btnDeletar.setIcon(new ImageIcon(JanelaCarrinho.class.getResource("/images/DeletarNoCarrinho.png")));
 		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnDeletar.setBounds(309, 281, 154, 42);
-		contentPane.add(btnDeletar);
+		contentPane.add(btnDeletar, "cell 2 2,grow");
 		
 		lblValorTotal = new JLabel();
 		lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblValorTotal.setHorizontalAlignment(SwingConstants.CENTER);
-		lblValorTotal.setBounds(97, 11, 284, 29);
-		contentPane.add(lblValorTotal);
+		contentPane.add(lblValorTotal, "cell 0 0 3 1,grow");
 	}
 
 	public void atualizarProdutoEmCarrinho(ActionListener actionListener) {
