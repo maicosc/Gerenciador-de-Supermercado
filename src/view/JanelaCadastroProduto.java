@@ -75,7 +75,12 @@ public class JanelaCadastroProduto extends JPanel {
 		list = new JList();
 		add(list, "cell 3 1 6 14,grow");
 		
+		JLabel lblNomeProduto = new JLabel("Nome do Produto:");
+		lblNomeProduto.setFont(new Font("Tahoma", Font.BOLD, 18));
+		add(lblNomeProduto, "cell 0 2,alignx right,growy");
+		
 		tfNomeProduto = new JTextField();
+		tfNomeProduto.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(tfNomeProduto, "cell 1 2,grow");
 		tfNomeProduto.setColumns(10);
 		
@@ -88,6 +93,7 @@ public class JanelaCadastroProduto extends JPanel {
 		add(lblCodProd, "cell 0 5 1 3,alignx center,growy");
 		
 		tfCodProd = new JTextField();
+		tfCodProd.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tfCodProd.setEnabled(false);
 		tfCodProd.setColumns(10);
 		add(tfCodProd, "cell 1 5 1 3,grow");
@@ -99,10 +105,6 @@ public class JanelaCadastroProduto extends JPanel {
 		btnAdicionarProduto.setIcon(new ImageIcon(JanelaCadastroProduto.class.getResource("/images/Adicionar.png")));
 		btnAdicionarProduto.setFont(new Font("Tahoma", Font.BOLD, 27));
 		add(btnAdicionarProduto, "cell 1 9,grow");
-		
-		JLabel lblNomeProduto = new JLabel("Nome do Produto:");
-		lblNomeProduto.setFont(new Font("Tahoma", Font.BOLD, 18));
-		add(lblNomeProduto, "cell 0 2,alignx right,growy");
 		
 		JLabel lblPreco = new JLabel("Preço:");
 		lblPreco.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -121,6 +123,7 @@ public class JanelaCadastroProduto extends JPanel {
 		add(btnAtualizarProduto, "cell 1 10,grow");
 		
 		tfPreco = new JTextField();
+		tfPreco.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tfPreco.setEnabled(false);
 		tfPreco.setColumns(10);
 		add(tfPreco, "cell 0 4,grow");
@@ -139,6 +142,7 @@ public class JanelaCadastroProduto extends JPanel {
 		add(btnDeletarProduto, "cell 1 11,growx,aligny top");
 		
 		tfQuantidade = new JTextField();
+		tfQuantidade.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tfQuantidade.setEnabled(false);
 		tfQuantidade.setColumns(10);
 		add(tfQuantidade, "cell 1 4,grow");

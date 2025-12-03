@@ -82,6 +82,7 @@ public class JanelaCadastro extends JPanel {
 		add(lblCPF, "cell 0 3,alignx right,growy");
 		
 		tfCpf = new JTextField();
+		tfCpf.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tfCpf.setEnabled(false);
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);

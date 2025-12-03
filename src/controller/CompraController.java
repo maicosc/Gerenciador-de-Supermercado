@@ -103,11 +103,12 @@ public class CompraController {
 					throw new ExcecaoR("Este campo aceita somente números inteiros positivos!");
 				}
 				int q = Integer.parseInt(quantidade.trim());
-				if (q > selecionado.getQuantidade()) {
+				Produto p = prodD.getProduto(selecionado.getCodProd());
+				if (q > p.getQuantidade()) {
 					throw new ExcecaoR("Quantidade selecionada excede a disponível!");
 				}
 				int qVolta = selecionado.getQuantidade() - q;
-				Produto p = prodD.getProduto(selecionado.getCodProd());
+				
 				prodD.atualizarQuantidadeProd(selecionado.getCodProd(), p.getQuantidade() + qVolta);
 				model.atualizarProdutoEmCarrinho(q, selecionado.getId());
 				JOptionPane.showMessageDialog(view2, "Produto atualizado!", "Carrinho atualizado",

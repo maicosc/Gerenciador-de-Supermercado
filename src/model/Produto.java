@@ -43,7 +43,7 @@ public class Produto {
 	@Override
 	public String toString() {
 		
-		return getNomeProd() + "------------------ R$ "+String.format("%.2f", getPreco());
+		return getNomeProd()+" ------------- Quantidade: "+ getQuantidade() + "------------------ R$ "+String.format("%.2f", getPreco());
 	}
 	
 }

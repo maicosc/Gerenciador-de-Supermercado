@@ -40,6 +40,17 @@ public class LoginController {
 						if (!!nome.trim().isEmpty()) {
 							throw new ExcecaoR("Digite seu nome!");
 						}
+						boolean ehNumero = true;
+						char[] arrayNome = nome.toCharArray();
+						for(int i=0; i<arrayNome.length; i++) {
+							 for (char c : arrayNome) {
+							      
+							        if (Character.isDigit(c)) {
+							            
+							            throw new ExcecaoR("O nome não pode conter numeros! ");
+							        }
+							    }
+						}
 						for (Usuario usuario : model.listarUsuarios()) {
 							if (usuario.getNome().equalsIgnoreCase(nome) ) {
 								tfCpf.setEnabled(true);
@@ -99,6 +110,17 @@ public class LoginController {
 			try {
 				if (!!nome.trim().isEmpty() && !!cpf.trim().isEmpty()) {
 					throw new ExcecaoR("Nenhum campo pode ficar vazio!");
+				}
+				boolean ehNumero = true;
+				char[] arrayNome = nome.toCharArray();
+				for(int i=0; i<arrayNome.length; i++) {
+					 for (char c : arrayNome) {
+					      
+					        if (Character.isDigit(c)) {
+					            
+					            throw new ExcecaoR("O nome não pode conter numeros! ");
+					        }
+					    }
 				}
 				boolean estaCorreto =false;
 				for (Usuario usuario : model.listarUsuarios()) {

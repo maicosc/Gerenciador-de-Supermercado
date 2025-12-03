@@ -60,6 +60,7 @@ public class JanelaLogin extends JPanel {
 		add(lblNewLabel, "flowy,cell 0 0 1 5,alignx center,aligny top");
 		
 		tfNome = new JTextField();
+		tfNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tfNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -85,6 +86,7 @@ public class JanelaLogin extends JPanel {
 		add(lblCpf, "cell 1 4,alignx right,aligny center");
 		
 		tfCpf = new JTextField();
+		tfCpf.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tfCpf.setEnabled(false);
 		tfCpf.setToolTipText("CPF");
 		tfCpf.setDragEnabled(true);
